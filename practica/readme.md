@@ -11,7 +11,7 @@
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
-[*Primera Parte*](/practica/ejercicio01/src/main/java/ar/edu/unlp/oo1/ejercicio1/impl/WallPostImpl.java).
+Enlace a la resolución de la [*Primera Parte*](/practica/ejercicio01/src/main/java/ar/edu/unlp/oo1/ejercicio1/impl/WallPostImpl.java) del ejercicio 1.
 
 </details>
 
