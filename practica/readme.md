@@ -15,3 +15,11 @@ Enlace a la resolución de la [*Primera Parte*](/practica/ejercicio01/src/main/j
 
 </details>
 
+### Segunda parte
+
+***Utilice los tests provistos por la cátedra para comprobar que su implementación de Wallpost es correcta. Estos se encuentran en el mismo proyecto, en la carpeta test, clase WallPostTest.***
+
+### Tercera parte
+
+***Una vez que su implementación pasa los tests de la primera parte puede utilizar la ventana que se muestra a continuación, la cual permite inspeccionar y manipular el post (definir su texto, hacer like / dislike y marcarlo como destacado).***
+
