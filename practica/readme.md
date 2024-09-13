@@ -32,3 +32,154 @@ Enlace a la resolución de la [*Primera Parte*](/practica/ejercicio01/src/main/j
 ***Cree un nuevo proyecto Maven llamado balanzaElectronica, siguiendo los pasos del documento “Trabajando con proyectos Maven, crear un proyecto Maven nuevo”. En el paquete correspondiente, programe las clases que se muestran a continuación.***
 
 ***Para realizar este ejercicio, utilice el recurso que se encuentra en el sitio de la cátedra. En este caso, se trata de dos clases, BalanzaTest y ProductoTest, las cuales debe agregar dentro del paquete tests. Haga las modificaciones necesarias para que el proyecto no tenga errores.***
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Balanza.java
+
+~~~java
+package ar.edu.unlp.oo1.ejercicio2;
+
+public class Balanza {
+
+    private int cantidadDeProductos;
+    private double precioTotal;
+    private double pesoTotal;
+
+    /*accessors necesarios (pista: todos menos los setters de balanza)*/
+    //getters
+    public int getCantidadDeProductos(){
+        return this.cantidadDeProductos;
+    }
+
+    public double getPrecioTotal(){
+        return this.precioTotal;
+    }
+
+    public double getPesoTotal(){
+        return this.pesoTotal;
+    }
+
+    //metodos
+    /*la balanza puede poner en cero todos sus valores*/
+    public void ponerEnCero(){
+        this.cantidadDeProductos=0;
+        this.precioTotal=0;
+        this.pesoTotal=0;
+    }
+
+    public void agregarProducto(Producto producto){
+        this.cantidadDeProductos++;
+        this.precioTotal+=producto.getPrecio();
+        this.pesoTotal+=producto.getPeso();
+    }
+
+    /*la balanza emite un ticket que indica el número de productos 
+    considerados, peso total, precio total.*/
+    public Ticket emitirTicket(){
+        Ticket ticket = new Ticket();
+        return ticket;
+    }
+}
+~~~
+
+Producto.java
+
+~~~java
+package ar.edu.unlp.oo1.ejercicio2;
+
+public class Producto {
+    
+    private double peso;
+    private double precioPorKilo;
+    private String descripcion;
+
+    /*accessors necesarios (pista: todos menos los setters de balanza)*/
+    //getters
+    public double getPeso(){
+        return this.peso;
+    }
+
+    public double getPrecioPorKilo(){
+        return this.precioPorKilo;
+    }
+
+    public String getDescripcion(){
+        return this.descripcion;
+    }
+
+    //setters
+    public void setPeso(double peso){
+        this.peso=peso;
+    }
+
+    public void setPrecioPorKilo(double precioPorKilo){
+        this.precioPorKilo=precioPorKilo;
+    }
+
+    public void setDescripcion(String descripcion){
+        this.descripcion=descripcion;
+    }
+
+    //metodos
+    public double getPrecio(){
+        return this.precioPorKilo*this.peso;
+    }
+}
+~~~
+
+Ticket.java
+
+~~~java
+package ar.edu.unlp.oo1.ejercicio2;
+
+public class Ticket {
+    
+    private java.time.LocalDate fecha;
+    private int cantidadDeProductos;
+    private double pesoTotal;
+    private double precioTotal;
+
+    /*accessors necesarios (pista: todos menos los setters de balanza)*/
+    //getters
+    public java.time.LocalDate getFecha(){
+        return this.fecha;
+    }
+
+    public int getCantidadDeProductos(){
+        return this.cantidadDeProductos;
+    }
+
+    public double getPesoTotal(){
+        return this.pesoTotal;
+    }
+
+    public double getPrecioTotal(){
+        return this.precioTotal;
+    }
+    
+    //setters
+    public void setFecha(java.time.LocalDate fecha){
+        this.fecha=fecha;
+    }
+
+    public void setCantidadDeProductos(int productos){
+        this.cantidadDeProductos=productos;
+    }
+
+    public void setPesoTotal(double pesoTotal){
+        this.pesoTotal=pesoTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal){
+        this.precioTotal=precioTotal;
+    }
+
+    //metodos
+    public double impuesto(){
+        return this.precioTotal*0.21;
+    }
+}
+~~~
+
+</details>
