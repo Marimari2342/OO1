@@ -183,3 +183,125 @@ public class Ticket {
 ~~~
 
 </details>
+
+## 🟡 Ejercicio 3 --> Presupuestos
+
+***Un presupuesto se utiliza para detallar los precios de un conjunto de productos que se desean adquirir. Se realiza para una fecha específica y es solicitado por un cliente, proporcionando una visión de los costos asociados.***
+
+* ***Implemente:***
+
+***Defina el proyecto Ejercicio 3 - Presupuesto y dentro de él implemente las clases que se observan en el diagrama. Ambas son subclases de Object.***
+
+* ***Discuta y reflexione***
+
+***Preste atención a los siguientes aspectos: ¿Cuáles son las variables de instancia de cada clase? ¿Qué variables inicializa? ¿De qué formas se puede realizar esta inicialización? ¿Qué ventajas y desventajas encuentra en cada una de ellas?***
+
+* ***Probando su código:***
+
+***Utilice los tests provistos  para confirmar que su implementación ofrece la funcionalidad esperada. En este caso, se trata de dos clases: ItemTest y PresupuestoTest, que debe agregar dentro del paquete tests Haga las modificaciones necesarias para que el proyecto no tenga errores. Siéntase libre de explorar las clases de test para intentar entender qué es lo que hacen.***
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Presupuesto.java
+
+~~~java
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Presupuesto {
+    private java.time.LocalDate fecha;
+    private String cliente;
+    private List <Item> items; 
+
+    //constructor
+    public Presupuesto(){
+        this.fecha=LocalDate.now();
+        this.items=new ArrayList<Item>();
+    }
+
+    //getters
+    public java.time.LocalDate getFecha(){
+        return this.fecha;
+    }
+
+    public String getCliente(){
+        return this.cliente;
+    }
+
+    //setters
+    public void setFecha(java.time.LocalDate fecha){
+        this.fecha=fecha;
+    }
+
+    public void setCliente(String cliente){
+        this.cliente=cliente;
+    }
+
+    //metodos
+    /*Agrega un item a la lista de items*/
+    public void agregarItem(Item item){
+        this.items.add(item);
+    }
+
+    /*calcula el costo total teniendo en cuenta todos los items de la lista*/
+    public double calcularTotal() {
+        double total = 0.0;
+        for (Item item : this.items) {
+            total += item.costo();
+        }
+        return total;
+    }
+}
+~~~
+
+Item.java
+
+~~~java
+public class Item {
+    private String detalle;
+    private int cantidad;
+    private double costoUnitario;
+
+    //constructor
+    public Item(String unDetalle,int unaCant,double unCostoUnitario){
+        this.detalle=unDetalle;
+        this.cantidad=unaCant;
+        this.costoUnitario=unCostoUnitario;
+    }
+
+    //getters
+    public String getDetalle(){
+        return this.detalle;
+    }
+
+    public int getCantidad(){
+        return this.cantidad;
+    }
+
+    public double getCostoUnitario(){
+        return this.costoUnitario;
+    }
+
+    //setters
+    public void setDetalle(String detalle){
+        this.detalle=detalle;
+    }
+
+    public void setCantidad(int cantidad){
+        this.cantidad=cantidad;
+    }
+
+    public void setCostoUnitario(double costoUnitario){
+        this.costoUnitario=costoUnitario;
+    }
+
+    //metodos
+    /*me devuelve el costo total calculando cantidad por costo unitario*/
+    public double costo(){
+        return this.getCantidad()*this.getCostoUnitario();
+    }
+}
+~~~
+
+</details>
