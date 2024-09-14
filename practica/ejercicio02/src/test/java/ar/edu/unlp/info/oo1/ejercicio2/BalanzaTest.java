@@ -1,9 +1,8 @@
-package ar.edu.unlp.info.oo1.balanzaElectronica;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package ar.edu.unlp.info.oo1.ejercicio2;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

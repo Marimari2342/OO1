@@ -4,23 +4,29 @@ import java.util.List;
 
 public class Balanza {
 
-    private int cantidadDeProductos;
-    private double precioTotal;
-    private double pesoTotal;
     private List <Producto> productos;
 
     /*accessors necesarios (pista: todos menos los setters de balanza)*/
     //getters
     public int getCantidadDeProductos(){
-        return this.cantidadDeProductos;
+        return this.productos.size(); //me retorna la cantidad de productos en la lista
     }
 
-    public double getPrecioTotal(){
-        return this.precioTotal;
+    public double getPrecioTotal() {
+        double total = 0.0;
+        for (Producto producto : this.productos) {
+            total += producto.getPrecio();
+        }
+        return total; //me retorna el precio total de todos los productos en la lista
     }
+
 
     public double getPesoTotal(){
-        return this.pesoTotal;
+        double total = 0.0;
+        for (Producto producto : this.productos) {
+            total += producto.getPeso();
+        }
+        return total; //me retorna el peso total de todos los productos en la lista
     }
 
     /*balanza mejorada*/
@@ -31,19 +37,17 @@ public class Balanza {
     //metodos
     /*la balanza puede poner en cero todos sus valores*/
     public void ponerEnCero(){
-        this.cantidadDeProductos=0;
-        this.precioTotal=0;
-        this.pesoTotal=0;
+        productos.clear(); //vacio la lista
     }
 
     public void agregarProducto(Producto producto){
-        this.productos.add(producto);
+        this.productos.add(producto); //agrego a la lista de productos
     }
 
     /*la balanza emite un ticket que indica el número de productos 
     considerados, peso total, precio total.*/
     public Ticket emitirTicket(){
-        Ticket ticket = new Ticket();
+        Ticket ticket = new Ticket(this.getCantidadDeProductos(), this.getPesoTotal(), this.getPrecioTotal());
         return ticket;
     }
 }
