@@ -1,10 +1,13 @@
 package ar.edu.unlp.info.oo1.ejercicio2;
 
+import java.util.List;
+
 public class Balanza {
 
     private int cantidadDeProductos;
     private double precioTotal;
     private double pesoTotal;
+    private List <Producto> productos;
 
     /*accessors necesarios (pista: todos menos los setters de balanza)*/
     //getters
@@ -20,6 +23,11 @@ public class Balanza {
         return this.pesoTotal;
     }
 
+    /*balanza mejorada*/
+    public List<Producto> getProductos(){
+        return this.productos;
+    }
+
     //metodos
     /*la balanza puede poner en cero todos sus valores*/
     public void ponerEnCero(){
@@ -28,8 +36,8 @@ public class Balanza {
         this.pesoTotal=0;
     }
 
-    public void agregarProducto(producto Producto){
-
+    public void agregarProducto(Producto producto){
+        this.productos.add(producto);
     }
 
     /*la balanza emite un ticket que indica el número de productos 
