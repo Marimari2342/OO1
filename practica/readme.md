@@ -399,3 +399,135 @@ public class Balanza {
 ~~~
 
 </details>
+
+## 🟡 Ejercicio 5 --> Figuras y Cuerpos
+
+### Figuras en 2D
+
+***En Taller de Programación definió clases para representar figuras geométricas.Retomaremos ese ejercicio para trabajar con Cuadrados y Círculos. El siguiente diagrama de clases documenta los mensajes que estos objetos deben entender.***
+
+### Cuerpos en 3D
+
+***Ahora que tenemos las clases Círculo y Cuadrado, podemos usarlos para construir cuerpos en 3D y calcular su volumen y superficie o área exterior. Vamos a pensar a un cilindro como "un cuerpo que tiene una figura 2D como cara basal y que tiene una altura (vea la siguiente imagen)". Si en el lugar de la figura2D tuviera un círculo, se formaría el siguiente cuerpo 3D.***
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Figura.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej4_figuras;
+
+public interface Figura {
+    public double getPerimetro();
+    public double getArea();
+}
+~~~
+
+Circulo.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej4_figuras;
+
+public class Circulo implements Figura {
+
+    private double radio;
+
+    //getters
+    public double getRadio(){
+        return this.radio;
+    }
+
+    public double getDiametro(){
+        return this.radio * 2;
+    }
+
+    //setters
+    public void setRadio(double radio){
+        this.radio=radio;
+    }
+
+    public void setDiametro(double diametro){
+        this.radio=diametro / 2;
+    }
+
+    //metodos
+    @Override
+    public double getPerimetro(){
+        return  2 * Math.PI * this.radio;
+    }
+
+    @Override
+    public double getArea(){
+        return Math.PI * this.radio * this.radio;
+    }
+}
+~~~
+
+Cuadrado.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej4_figuras;
+
+public class Cuadrado implements Figura{
+    
+    private double lado;
+
+    //getters
+    public double getLado(){
+        return this.lado;
+    }
+
+    //setters
+    public void setLado(double lado){
+        this.lado=lado;
+    }
+
+    //metodos
+    @Override
+    public double getPerimetro(){
+        return  4 * this.lado;
+    }
+
+    @Override
+    public double getArea(){
+        return this.lado * this.lado;
+    }
+}
+~~~
+
+Cuerpo3D.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej4_figuras;
+
+public class Cuerpo3D {
+    
+    private double altura;
+	private Figura caraBasal;
+
+    //getters
+    public double getAltura(){
+        return this.altura;
+    }
+
+    //setters
+    public void setAltura(double altura){
+        this.altura=altura;
+    }
+
+    public void setCaraBasal(Figura figura){
+        this.caraBasal=figura;
+    }
+
+    //metodos
+        public double getVolumen(){ //volumen = base (cara basal) por altura 
+        return this.caraBasal.getArea() * this.altura;
+    }
+
+    public double getSuperficieExterior(){ //SupEx = area + perimetro por altura
+        return (2 * this.caraBasal.getArea() + this.caraBasal.getPerimetro() * this.altura);
+    }
+}
+~~~
+
+</details>
