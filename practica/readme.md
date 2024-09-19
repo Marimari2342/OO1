@@ -531,3 +531,19 @@ public class Cuerpo3D {
 ~~~
 
 </details>
+
+## 🟡 Ejercicio 6 --> Genealogía salvaje
+
+En una reserva de vida salvaje, los cuidadores quieren llevar registro detallado de los animales que cuidan y sus familias. Para ello nos han pedido ayuda.
+
+### Complete el diseño e implemente
+
+Modelar una solución en objetos e implementar la clase Mamífero (como subclase de Object). El siguiente diagrama de clases (incompleto) nos da una idea de los mensajes que un mamífero entiende. Proponga una solución para el método <code>tieneComoAncestroA(...)</code> y deje la implementación para el final y discuta su solución con el ayudante. 
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+
+~~~
+
+</details>
