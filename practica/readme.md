@@ -658,7 +658,7 @@ Siguiendo los ejemplos de ejercicios anteriores, ejecute las pruebas automatizad
 
 ## 🟡 Ejercicio 7 --> Red de Alumbrado
 
-Imagine una red de alumbrado donde cada farola está conectada a una o varias vecinas formando un (grafo conexo)[https://es.wikipedia.org/wiki/Grafo_conexo]. Cada una de las farolas tiene un interruptor. Es suficiente con encender o apagar una farola cualquiera para que se enciendan o apaguen todas las demás. Sin embargo, si se intenta apagar una farola apagada (o si se intenta encender una farola encendida) no habrá ningún efecto, ya que no se propagará esta acción hacia las vecinas.
+Imagine una red de alumbrado donde cada farola está conectada a una o varias vecinas formando un [grafo conexo](https://es.wikipedia.org/wiki/Grafo_conexo). Cada una de las farolas tiene un interruptor. Es suficiente con encender o apagar una farola cualquiera para que se enciendan o apaguen todas las demás. Sin embargo, si se intenta apagar una farola apagada (o si se intenta encender una farola encendida) no habrá ningún efecto, ya que no se propagará esta acción hacia las vecinas.
 
 La funcionalidad a proveer permite:
 
@@ -673,6 +673,8 @@ La funcionalidad a proveer permite:
 ### Modele e implemente
 
 1. Realice el diagrama UML de clases de la solución al problema. 
+
+[imagen](/practica/cosas/img01.png)
 
 2. Implemente en Java, la clase Farola, como subclase de Object, con los métodos dados.
 
