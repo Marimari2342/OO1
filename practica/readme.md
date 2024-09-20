@@ -674,7 +674,7 @@ La funcionalidad a proveer permite:
 
 1. Realice el diagrama UML de clases de la solución al problema. 
 
-[imagen](/practica/cosas/img01.png)
+![imagen](/practica/cosas/img01.png)
 
 2. Implemente en Java, la clase Farola, como subclase de Object, con los métodos dados.
 
