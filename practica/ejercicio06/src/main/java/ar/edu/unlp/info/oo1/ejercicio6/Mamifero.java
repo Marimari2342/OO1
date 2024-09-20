@@ -8,6 +8,14 @@ public class Mamifero {
     private Mamifero madre;
     private Mamifero padre;
 
+    public Mamifero() {
+    }
+
+    public Mamifero(String unNombre) {
+        this.identificador=unNombre;
+    }
+
+
     //getters
     public String getIdentificador(){
         return this.identificador;
