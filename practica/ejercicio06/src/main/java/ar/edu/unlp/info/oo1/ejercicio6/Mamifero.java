@@ -61,28 +61,28 @@ public class Mamifero {
     //otros metodos
     public Mamifero getAbueloMaterno(){
         if (this.madre!=null){
-            return this.madre.padre;
+            return this.madre.getPadre();
         }
         else return null;
     }
 
     public Mamifero getAbuelaMaterna(){
         if (this.madre!=null){
-            return this.madre.madre;
+            return this.madre.getMadre();
         }
         else return null;
     }
 
     public Mamifero getAbueloPaterno(){
         if (this.padre!=null){
-            return this.padre.padre;
+            return this.padre.getPadre();
         }
         else return null;
     }
 
     public Mamifero getAbuelaPaterna(){
         if (this.padre!=null){
-            return this.padre.madre;
+            return this.padre.getMadre();
         }
         else return null;
     }
