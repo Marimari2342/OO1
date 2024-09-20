@@ -760,9 +760,79 @@ Sea la jerarquía de Empleado como muestra la figura de la izquierda, cuya imple
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
-~~~java
+Empleado.java
 
+~~~java
+public double montoBasico(){
+return 35000;}
+
+public double aportes(){
+return 13500;}
+
+public double sueldoBasico(){
+return this.montoBasico()+this.aportes();}
 ~~~
+
+EmpleadoJerarquico.java (hereda de Empleado)
+
+~~~java
+public double sueldoBasico(){
+return super.sueldoBasico()+this.bonoPorCategoria();}
+
+public double montoBasico(){
+return 45000;}
+
+public double bonoPorCategoria(){
+return 8000;}
+~~~
+
+Gerente.java (hereda de EmpleadoJerarquico)
+
+~~~java
+public double aportes(){
+return this.montoBasico()*0.05;}
+
+public double montoBasico(){
+return 57000;}
+~~~
+
+Vemos estos dos casos:
+
+* CASO 1
+
+~~~java
+Gerente alan = new Gerente("Alan Turing");
+double aportesDeAlan = alan.aportes();
+~~~
+
+Los **metodos ejecutados** son:
+
+(1) +aportes() de la clase Gerente.
+
+(2) +montoBasico() de la clase Gerente (porque this.montoBasico() llama al método en Gerente).
+
+El **valor de la variable** aportesDeAlan será de 57000*0.05 = 2850
+
+* CASO 2
+
+~~~java
+Gerente alan = new Gerente("Alan Turing");
+double sueldoBasicoDeAlan = alan.sueldoBasico();
+~~~
+
+Los **metodos ejecutados** son:
+
+(1) +sueldoBasico() de la clase EmpleadoJerarquico (como en Gerente no tengo el metodo voy al padre EmpleadoJerarquico y tomo el metodo de ahi).
+
+(2) +sueldoBasico() de la clase Empleado (porque super.sueldoBasico() en EmpleadoJerarquico llama a este método).
+
+(3) +montoBasico() de la clase Empleado (llamado dentro de sueldoBasico() de Empleado).
+
+(4) +aportes() de la clase Empleado (llamado dentro de sueldoBasico() de Empleado).
+
+(5) +bonoPorCategoria() de la clase EmpleadoJerarquico (llamado dentro de sueldoBasico() de EmpleadoJerarquico).
+
+El **valor de la variable** sueldoBasicoDeAlan será de 35000+13500+8000=56500
 
 </details>
 
