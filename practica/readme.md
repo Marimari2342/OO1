@@ -651,3 +651,116 @@ public class Mamifero {
 ~~~
 
 </details>
+
+### Pruebas automatizadas 
+
+Siguiendo los ejemplos de ejercicios anteriores, ejecute las pruebas automatizadas provistas. 
+
+## 🟡 Ejercicio 7 --> Red de Alumbrado
+
+Imagine una red de alumbrado donde cada farola está conectada a una o varias vecinas formando un (grafo conexo)[https://es.wikipedia.org/wiki/Grafo_conexo]. Cada una de las farolas tiene un interruptor. Es suficiente con encender o apagar una farola cualquiera para que se enciendan o apaguen todas las demás. Sin embargo, si se intenta apagar una farola apagada (o si se intenta encender una farola encendida) no habrá ningún efecto, ya que no se propagará esta acción hacia las vecinas.
+
+La funcionalidad a proveer permite:
+
+* Crear farolas (inicialmente están apagadas).
+
+* Conectar farolas a tantas vecinas como uno quiera (conexiones bidireccionales). 
+
+* Encender una farola (y obtener el efecto antes descrito).
+
+* Apagar una farola (y obtener el efecto antes descrito).
+
+### Modele e implemente
+
+1. Realice el diagrama UML de clases de la solución al problema. 
+
+2. Implemente en Java, la clase Farola, como subclase de Object, con los métodos dados.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Farola.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.red_alumbrado;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Farola {
+    
+    private Boolean on;
+    private List<Farola> neighbors;
+
+    /*Crear una farola. Debe inicializarla como apagada*/
+    public Farola (){
+        this.neighbors = new ArrayList<Farola>(); //inicio sin vecinos
+        this.on=false;
+    }
+
+    /*Crea la relación de vecinos entre las farolas. La relación de vecinos entre las
+    farolas es recíproca, es decir el receptor del mensaje será vecino de otraFarola,
+    al igual que otraFarola también se convertirá en vecina del receptor del mensaje*/
+    public void pairWithNeighbor( Farola otraFarola ){
+        if (!this.neighbors.contains(otraFarola)){ //pregunto así la op se hace una vez sola
+            this.neighbors.add(otraFarola);
+            otraFarola.pairWithNeighbor(this);
+        }
+    }
+
+    /*Retorna sus farolas vecinas*/
+    public List<Farola> getNeighbors (){
+        return this.neighbors;
+    }
+
+
+    /*Si la farola no está encendida, la enciende y propaga la acción.*/
+    public void turnOn(){
+        if(!this.on){
+            this.on=true;
+            this.getNeighbors().stream().forEach(Farola::turnOn);
+        }
+    }
+
+    /*Si la farola no está apagada, la apaga y propaga la acción.*/
+    public void turnOff(){
+        if(this.on){
+            this.on=false;
+            this.getNeighbors().stream().forEach(Farola::turnOff);
+        }
+    }
+
+    /*Retorna true si la farola está encendida.*/
+    public boolean isOn(){
+        return this.on;
+    }
+
+    /*Retorna true si la farola está apagada.*/
+    public boolean isOff(){
+        return !this.on;
+    }
+}
+~~~
+
+</details>
+
+### Verifique su solución con las pruebas automatizadas 
+
+Utilice los tests provistos por la cátedra para probar las implementaciones del punto 2.
+
+## 🟡 Ejercicio 8 --> Method lookup con Empleados
+
+Sea la jerarquía de Empleado como muestra la figura de la izquierda, cuya implementación de referencia se incluye en la tabla de la derecha. Analice cada uno de los siguientes fragmentos de código dados y resuelva las tareas indicadas abajo.
+
+* Liste todos los métodos, indicando nombre y clase, que son ejecutados como resultado del envío del último mensaje de cada fragmento de código (por ejemplo, (1) método +aportes de la clase Empleado, (2) ...)
+
+* ¿Qué valores tendrán las variables aportesDeAlan y sueldoBasicoDeAlan luego de ejecutar cada fragmento de código?
+
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+
+~~~
+
+</details>
+
