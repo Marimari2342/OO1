@@ -836,3 +836,182 @@ El **valor de la variable** sueldoBasicoDeAlan será de 35000+13500+8000=56500
 
 </details>
 
+## 🟡 Ejercicio 9 --> Cuenta con ganchos
+
+Observe con detenimiento el diseño que se muestra en el siguiente diagrama. La clase cuenta es abstracta. El método puedeExtraer() es abstracto. Las clases CajaDeAhorro y CuentaCorriente son concretas y están incompletas.
+
+### Tarea A: 
+
+Complete la implementación de las clases CajaDeAhorro y CuentaCorriente para que se puedan efectuar depósitos, extracciones y transferencias teniendo en cuenta los siguientes criterios. 
+
+* Las cajas de ahorro solo pueden extraer y transferir cuando cuentan con fondos suficientes. 
+
+* Las extracciones, los depósitos y las transferencias desde cajas de ahorro tienen un costo adicional de 2% del monto en cuestión (téngalo en cuenta antes de permitir una extracción o transferencia desde caja de ahorro).
+
+* Las cuentas corrientes pueden extraer aún cuando el saldo de la cuenta sea insuficiente. Sin embargo, no deben superar cierto límite por debajo del saldo. Dicho límite se conoce como límite de descubierto (algo así como el máximo saldo negativo permitido). Ese límite es diferente para cada cuenta (lo negocia el cliente con la gente del banco). 
+
+* Cuando se abre una cuenta corriente, su límite descubierto es 0 (no olvide definir el constructor por default).
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Cuenta.java
+
+~~~java
+package ar.edu.unlp.info.oo1.ejercicio09;
+
+public abstract class Cuenta {
+    
+    private double saldo; 
+
+    public Cuenta(){
+        this.saldo=0;
+    }
+
+    public double getSaldo(){
+        return this.saldo;
+    }
+
+    public void depositar (double monto){
+        this.saldo+=monto;
+    }
+
+    protected void extraerSinControlar(double monto){
+        this.saldo-=monto;
+    }
+
+    public boolean extraer(double monto){
+        if (this.puedeExtraer(monto)){
+            this.extraerSinControlar(monto);
+            return true;
+        }
+        return false;
+    }
+
+    protected abstract boolean puedeExtraer(double monto);
+
+    public boolean transferirACuenta(double monto, Cuenta cuentaDestino){
+        if (this.puedeExtraer(monto)){
+            this.extraerSinControlar(monto);
+            cuentaDestino.depositar(monto);
+            return true;
+        }
+        return false;
+    }
+}
+~~~
+
+CuentaCorriente.java
+
+~~~java
+package ar.edu.unlp.info.oo1.ejercicio09;
+
+public class CuentaCorriente extends Cuenta{
+    
+    private double descubierto;
+
+    /* Cuando se abre una cuenta corriente, su límite descubierto es 0 
+    (no olvide definir el constructor por default) */
+    public CuentaCorriente(){
+        super();
+        this.descubierto=0;
+    }
+
+    //metodos
+    public double getDescubierto(){
+        return this.descubierto;
+    }
+
+    public void setDescubierto(double monto){
+        this.descubierto=monto;
+    }
+
+    /*Las cuentas corrientes pueden extraer aún cuando el saldo de la cuenta sea 
+    insuficiente. Sin embargo, no deben superar cierto límite por debajo del saldo. 
+    Dicho límite se conoce como límite de descubierto (algo así como el máximo saldo 
+    negativo permitido). Ese límite es diferente para cada cuenta (lo negocia el 
+    cliente con la gente del banco). */
+    @Override
+    protected boolean puedeExtraer(double monto){
+        return (this.getDescubierto()+this.getSaldo()>=monto);
+    }
+}
+~~~
+
+CajaDeAhorro.java
+
+~~~java
+package ar.edu.unlp.info.oo1.ejercicio09;
+
+public class CajaDeAhorro extends Cuenta {
+
+    public CajaDeAhorro(){
+        super();
+    }
+
+    /** Las cajas de ahorro solo pueden extraer y transferir cuando cuentan con
+     * fondos suficientes.  */
+
+    @Override
+    protected boolean puedeExtraer(double monto){
+        return (this.getSaldo() >= monto);
+    }
+    
+    /*Las extracciones, los depósitos y las transferencias desde cajas de ahorro 
+    tienen un costo adicional de 2% del monto en cuestión (téngalo en cuenta antes 
+    de permitir una extracción o transferencia desde caja de ahorro). */
+
+    @Override
+    public boolean extraer(double monto){
+        return super.extraer(monto*1.02);
+    }
+
+    @Override
+    public void depositar(double monto){
+        super.depositar(monto*0.98);
+    }
+
+    @Override
+    public boolean transferirACuenta(double monto, Cuenta cuentaDestino){
+        return super.transferirACuenta(monto*1.02, cuentaDestino);
+    }
+
+}
+~~~
+
+</details>
+
+### Tarea B: 
+
+Reflexione, charle con el ayudante y responda a las siguientes preguntas.
+
+(a) ¿Por qué cree que este ejercicio se llama "Cuenta con ganchos"? 
+
+(b) En las implementaciones de los métodos extraer() y transferirACuenta()  que se ven en el diagrama, ¿quién es this? ¿Puede decir de qué clase es this?
+
+(c) ¿Por qué decidimos que los métodos puedeExtraer() y extraerSinControlar tengan visibilidad "protegido"?
+
+(d) ¿Se puede transferir de una caja de ahorro a una cuenta corriente y viceversa? ¿por qué? ¡Pruébelo!
+
+(e)¿Cómo se declara en Java un método abstracto? ¿Es obligatorio implementarlo? ¿Qué dice el compilador de Java si una subclase no implementa un método abstracto que hereda?
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+* (a) El ejercicio se llama "Cuenta con ganchos" porque la clase abstracta <code>Cuenta</code> define una estructura básica y deja puntos de extensión ("ganchos") para que las subclases como <code>CajaDeAhorro</code> y <code>CuentaCorriente</code> implementen su propio comportamiento. En este caso, el "gancho" clave es el método abstracto <code>puedeExtraer()</code>, que debe ser implementado de forma diferente por cada subclase. Este patrón permite una implementación más flexible, donde el comportamiento específico se define en las subclases.
+
+------------------------
+
+* (b) En las implementaciones de los métodos <code>extraer()</code> y <code>transferirACuenta()</code> que se ven en el diagrama, this se refiere a la instancia de la clase actual desde la cual se llama al método. En este caso, this será una instancia concreta de una de las subclases que heredan de la clase abstracta <code>Cuenta</code>, es decir, será una instancia de <code>CajaDeAhorro</code> o <code>CuentaCorriente</code>, dependiendo de cuál esté utilizando el método.
+
+------------------------
+
+* (c) Los métodos <code>puedeExtraer()</code> y <code>extraerSinControlar()</code> tienen visibilidad "protegida" (protected) para que las subclases puedan acceder a ellos y redefinir su comportamiento según la lógica particular de cada tipo de cuenta. Al mismo tiempo, la visibilidad protegida impide que estas funciones sean accesibles desde fuera del paquete o desde otras clases que no hereden de <code>Cuenta</code>, limitando el acceso sólo a las clases relevantes.
+
+------------------------
+
+* (d) Sí, se puede transferir de una <code>CajaDeAhorro</code> a una <code>CuentaCorriente</code> y viceversa, ya que ambas clases heredan de la clase abstracta <code>Cuenta</code>, que tiene el método <code>transferirACuenta()</code> común. Mientras ambas cuentas implementen correctamente los métodos requeridos para controlar extracciones, depósitos y transferencias, no debería haber problemas en la transferencia entre ellas, siempre y cuando las condiciones de cada tipo de cuenta (como el costo adicional en las cajas de ahorro o el límite de descubierto en las cuentas corrientes) sean respetadas.
+
+------------------------
+
+* (e) Un método abstracto se declara utilizando la palabra clave <code>abstract</code> y no tiene cuerpo (no se implementa en la clase abstracta). Es obligatorio que todas las subclases implementen los métodos abstractos que heredan. Si una subclase concreta no implementa un método abstracto heredado, el compilador de Java generará un error, ya que esa subclase debe proporcionar una implementación o declararse también como abstracta.
+
+</details>
