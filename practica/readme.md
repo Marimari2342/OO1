@@ -1081,8 +1081,166 @@ Cuando se quiere saber cuánto dinero representan las inversiones del inversor, 
 * El valor actual de un PlazoFijo equivale al montoDepositado incrementado como corresponda por el porcentaje de interés diario, desde la fecha de constitución a la fecha actual (la del momento en el que se hace el cálculo).  
 
 * El valor actual de una InversionEnAcciones se calcula multiplicando el número de acciones por el valor unitario de las mismas.
+
 * Recordatorio: No olvide la inicialización.
 
 ### Tarea: Pruebas automatizadas
 
 (c) Implemente los tests (JUnit) que considere necesarios.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Inversor.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej11_inversor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Inversor {
+    //variables de instancia
+    private String nombre;
+	private List<Inversion> inversiones;
+
+    //constructor 
+    public Inversor(String nombre){
+        this.nombre=nombre;
+        this.inversiones = new ArrayList<Inversion>(); 
+    }
+
+    //getters
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public List<Inversion> getInversiones(){
+        return this.inversiones;
+    }
+
+    //metodos
+    public void agregarInversion(Inversion inversion){
+        this.getInversiones().add(inversion);
+    }
+
+    /*El valor actual de las inversiones de un inversor es la suma de los valores 
+    actuales de cada una de las inversiones en su cartera (su colección de 
+    inversiones).*/
+    public double valorActual(){
+        return this.inversiones.stream()
+                .mapToDouble(Inversion::valorActual)
+                .sum();
+    }
+
+    /*Explicacion del metodo
+     * this.inversiones.stream():
+    Convierte la lista de inversiones (inversiones), que es un ArrayList<Inversion>,
+    en un flujo (stream).
+     * mapToDouble(Inversion::valorActual):
+    Aplica el método valorActual() a cada elemento de la lista (es decir, a cada 
+    objeto de tipo Inversion).
+     * .sum():
+    Suma todos los valores double generados por el paso anterior y devuelve el total.
+     */
+}
+~~~
+
+Inversion.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej11_inversor;
+
+public interface Inversion {
+    /*Si los métodos solo están declarados y no implementan un comportamiento, 
+    es interfaz. Si implementan un comportamiento común a todos los hijos, es 
+    clase abstracta. */
+    public double valorActual();
+}
+~~~
+
+InversionEnAcciones.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej11_inversor;
+
+public class InversionEnAcciones implements Inversion{
+    //variables de instancia
+    private String nombre;
+	private int cantidad;
+	private double valorUnitario;
+
+    public InversionEnAcciones(String nombre, int cant, double valor){
+        this.nombre=nombre;
+        this.cantidad=cant;
+        this.valorUnitario=valor;
+    }
+
+    //getters
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public int getCantidad(){
+        return this.cantidad;
+    }
+
+    public double getValorUnitario(){
+        return this.valorUnitario;
+    }
+
+    //metodos
+    /*El valor actual de una InversionEnAcciones se calcula multiplicando el 
+    número de acciones por el valor unitario de las mismas. */
+    @Override
+    public double valorActual(){
+        return this.getValorUnitario()*this.getCantidad();
+    }
+}
+~~~
+
+CuentaCorriente.java
+
+~~~java
+package main.java.ar.edu.unlp.info.oo1.ej11_inversor;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class PlazoFijo implements Inversion{
+    //variables de instancia
+    private LocalDate fechaDeConstitucion;
+	private double montoDepositado;
+	private double porcentajeDeInteresDiario;
+
+    //constructor
+    public PlazoFijo(LocalDate fecha, double monto, double interes){
+        this.fechaDeConstitucion=fecha;
+        this.montoDepositado=monto;
+        this.porcentajeDeInteresDiario=interes;
+    }
+
+    //getters
+    public LocalDate getFechaDeConstitucion() {
+        return this.fechaDeConstitucion;
+    }
+
+    public double getMontoDepositado(){
+        return this.montoDepositado;
+    }
+
+    public double getPorcentajeDeInteresDiario(){
+        return this.porcentajeDeInteresDiario;
+    }
+
+    //metodos
+    /*El valor actual de un PlazoFijo equivale al montoDepositado incrementado 
+    como corresponda por el porcentaje de interés diario, desde la fecha de 
+    constitución a la fecha actual (la del momento en el que se hace el cálculo). */
+    @Override
+    public double valorActual(){
+        long cantDias = ChronoUnit.DAYS.between(this.getFechaDeConstitucion(), LocalDate.now());
+        return this.getMontoDepositado()+this.getPorcentajeDeInteresDiario()*cantDias;
+    }
+}
+~~~
+</details>
