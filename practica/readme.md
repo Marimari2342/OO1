@@ -1019,3 +1019,70 @@ Reflexione, charle con el ayudante y responda a las siguientes preguntas.
 ### Tarea C
 
 Escriba los tests de unidad que crea necesarios para validar que su implementación funciona adecuadamente.
+
+## 🟡 Ejercicio 10 --> Job Scheduler
+
+El JobScheduler es un objeto cuya responsabilidad es determinar qué trabajo debe resolverse a continuación. El siguiente diseño ayuda a entender cómo funciona la implementación actual del JobScheduler.
+
+* El mensaje <code>schedule(job: JobDescription)</code> recibe un job (trabajo) y lo agrega al final de la colección de trabajos pendientes.
+
+* El mensaje <code>next()</code> determina cuál es el siguiente trabajo de la colección que debe ser atendido, lo retorna, y lo quita de la colección.
+
+En la implementación actual del método <code>next()</code>, el JobScheduler utiliza el valor de la variable <code>strategy</code> para determinar cómo elegir el siguiente trabajo. Dicha implementación presenta dos serios problemas de diseño:
+
+1. Secuencia de ifs (o sentencia switch/case) para implementar alternativas de un mismo comportamiento.
+
+2. Código duplicado.
+
+### Tareas
+
+(a) Analice el código existente: utilice el código y los tests provistos por la cátedra y aplique lo aprendido (en particular en relación a herencia y polimorfismo) para eliminar los problemas mencionados. Siéntase libre de agregar nuevas clases como considere necesario. También puede cambiar la forma en la que los objetos se crean e inicializan. Asuma que una vez elegida una estrategia para un scheduler no puede cambiarse.
+
+(b) Verifique su solución con las pruebas automatizadas: sus cambios probablemente hagan que los tests dejen de funcionar. Corríjalos y mejórelos como sea necesario.
+
+## 🟡 Ejercicio 11 --> El Inversor
+
+Estamos desarrollando una aplicación móvil para que un inversor pueda conocer el estado de sus inversiones. El sistema permite manejar dos tipos de inversiones: Inversión en acciones e inversión en plazo fijo. Nuestro sistema representa al inversor y a cada uno de los tipos de inversiones con una clase.
+
+* La clase InversionEnAcciones tiene las siguientes variables de instancia:
+	
+    ~~~
+    String nombre;
+	int cantidad;
+	double valorUnitario;
+    ~~~
+
+* La clase PlazoFijo tiene las siguientes variables de instancia:
+	
+    ~~~
+    LocalDate fechaDeConstitucion;
+	double montoDepositado;
+	double porcentajeDeInteresDiario;
+    ~~~
+
+* La clase Inversor tiene las siguientes variables de instancia:
+	
+    ~~~
+    String nombre;
+	List<?> inversiones;
+    ~~~
+
+La variable inversiones de la clase Inversor es una colección con instancias de cualquiera de las dos clases de inversiones que pueden estar mezcladas.
+Cuando se quiere saber cuánto dinero representan las inversiones del inversor, se envía al mismo el mensaje valorActual().
+
+### Tarea: Modele e implemente.
+
+(a) Realice el diagrama UML de clases de la solución al problema.
+
+(b) Implemente en Java lo que considere necesario para que las instancias de Inversor entiendan el mensaje valorActual() teniendo en cuenta los siguientes criterios:
+
+* El valor actual de las inversiones de un inversor es la suma de los valores actuales de cada una de las inversiones en su cartera (su colección de inversiones).  
+
+* El valor actual de un PlazoFijo equivale al montoDepositado incrementado como corresponda por el porcentaje de interés diario, desde la fecha de constitución a la fecha actual (la del momento en el que se hace el cálculo).  
+
+* El valor actual de una InversionEnAcciones se calcula multiplicando el número de acciones por el valor unitario de las mismas.
+* Recordatorio: No olvide la inicialización.
+
+### Tarea: Pruebas automatizadas
+
+(c) Implemente los tests (JUnit) que considere necesarios.
