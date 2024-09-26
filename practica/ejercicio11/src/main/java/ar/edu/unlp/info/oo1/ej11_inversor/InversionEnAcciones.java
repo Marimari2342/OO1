@@ -6,6 +6,7 @@ public class InversionEnAcciones implements Inversion{
 	private int cantidad;
 	private double valorUnitario;
 
+    //constructor
     public InversionEnAcciones(String nombre, int cant, double valor){
         this.nombre=nombre;
         this.cantidad=cant;
