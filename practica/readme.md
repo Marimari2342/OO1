@@ -1074,6 +1074,12 @@ Cuando se quiere saber cuánto dinero representan las inversiones del inversor, 
 
 (a) Realice el diagrama UML de clases de la solución al problema.
 
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+![diagramaUML](/practica/cosas/img02.png)
+
+</details>
+
 (b) Implemente en Java lo que considere necesario para que las instancias de Inversor entiendan el mensaje valorActual() teniendo en cuenta los siguientes criterios:
 
 * El valor actual de las inversiones de un inversor es la suma de los valores actuales de cada una de las inversiones en su cartera (su colección de inversiones).  
