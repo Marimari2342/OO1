@@ -186,7 +186,7 @@ Esto utiliza la API de Streams de Java para filtrar y procesar entradas en un ma
 
 </details>
 
-***b) Para practicar los mensajes investigados anteriormente, escriba un test de unidad que contenga lo siguiente:***
+#### Para practicar los mensajes investigados anteriormente, escriba un test de unidad que contenga lo siguiente:
 
 * Cree un map un Map<String, Integer>, y agregue las tuplas (“Lionel Messi”, 111), (“Gabriel Batistuta”, 56), (“Kun Agüero”, 42)
 
@@ -198,7 +198,7 @@ Esto utiliza la API de Streams de Java para filtrar y procesar entradas en un ma
 
 * Obtenga la cantidad total de goles 
 
-***c) Como se mencionó, cualquier objeto puede actuar como clave. Es decir, pueden ser instancias de clases definidas por el programador. Modele e implemente la clase Jugador con apellido y nombre. Escriba otro test de unidad similar al de la tarea 2, pero utilizando  Map</Jugador, Integer/>***
+### Como se mencionó, cualquier objeto puede actuar como clave. Es decir, pueden ser instancias de clases definidas por el programador. Modele e implemente la clase Jugador con apellido y nombre. Escriba otro test de unidad similar al de la tarea 2, pero utilizando  Map</Jugador, Integer/>
 
 
 
