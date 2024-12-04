@@ -7,7 +7,7 @@ Un Map en Java es una colección que asocia objetos que actúan cómo claves (ke
 Para definir un Map, es necesario indicar el tipo que tendrán sus claves y valores: por ejemplo, una variable de tipo Map</String, Integer/> define un mapa en donde sus claves son de tipo String, y sus valores de tipo Integer. Observe que Map</K, V/> es una interfaz.
 
 
-* ***a) Lea la documentación de Map en Java y responda:***
+#### a) Lea la documentación de Map en Java y responda:
 
 * ¿Qué implementaciones provee Java para utilizar un Map? ¿Cuáles de ellas son destinadas a uso general?
 
@@ -186,7 +186,7 @@ Esto utiliza la API de Streams de Java para filtrar y procesar entradas en un ma
 
 </details>
 
-* ***b) Para practicar los mensajes investigados anteriormente, escriba un test de unidad que contenga lo siguiente:***
+***b) Para practicar los mensajes investigados anteriormente, escriba un test de unidad que contenga lo siguiente:***
 
 * Cree un map un Map<String, Integer>, y agregue las tuplas (“Lionel Messi”, 111), (“Gabriel Batistuta”, 56), (“Kun Agüero”, 42)
 
@@ -198,7 +198,7 @@ Esto utiliza la API de Streams de Java para filtrar y procesar entradas en un ma
 
 * Obtenga la cantidad total de goles 
 
-* ***c) Como se mencionó, cualquier objeto puede actuar como clave. Es decir, pueden ser instancias de clases definidas por el programador. Modele e implemente la clase Jugador con apellido y nombre. Escriba otro test de unidad similar al de la tarea 2, pero utilizando  Map</Jugador, Integer/>
+***c) Como se mencionó, cualquier objeto puede actuar como clave. Es decir, pueden ser instancias de clases definidas por el programador. Modele e implemente la clase Jugador con apellido y nombre. Escriba otro test de unidad similar al de la tarea 2, pero utilizando  Map</Jugador, Integer/>***
 
 
 
