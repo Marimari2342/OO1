@@ -272,4 +272,186 @@ public class GolesMapTest {
 #### c) Como se mencionó, cualquier objeto puede actuar como clave. Es decir, pueden ser instancias de clases definidas por el programador. Modele e implemente la clase Jugador con apellido y nombre. Escriba otro test de unidad similar al de la tarea 2, pero utilizando  Map</Jugador, Integer/>
 
 
+## Segunda parte
 
+Un Bag (bolsa) es una colección que permite almacenar elementos sin ningún orden específico y admite elementos repetidos. Este objeto requiere un buen tiempo de respuesta para conocer la cardinalidad de sus elementos, y por esa razón almacena la cardinalidad de cada elemento (cantidad de veces que fue agregado en la bolsa). Por ejemplo, sí agregamos 3 veces un objeto en la bolsa, y luego eliminamos 1 referencia, la cardinalidad de ese objeto en la bolsa es 2.
+
+El protocolo de la interface Bag<T> es:
+
+~~~java
+public interface Bag<T> extends Collection<T> {
+    /**
+     * Agrega un elemento al Bag, incrementando en 1 su cardinalidad.
+     */
+    @Override
+    boolean add(T element);
+
+    /**
+     * Devuelve la cardinalidad del elemento. Sí el elemento no está en el Bag,            
+     * devuelve 0.
+     */
+    int occurrencesOf(T element);
+
+    /**
+     * Elimina una referencia del elemento del Bag. Sí el elemento no está en 
+     * el Bag, no hace nada.
+     */
+    void removeOccurrence(T element);
+
+    /**
+     * Elimina el elemento del Bag. Sí el elemento no está en el Bag, no hace
+     * nada
+     */
+    void removeAll(T element);
+
+    /**
+     * Devuelve el número total de elementos en el Bag, es decir, la suma de
+     * todas las cardinalidades de todos sus elementos.
+     */
+    @Override
+    int size();
+}
+~~~
+
+Observe que la interfaz Bag<T> extiende Collection<T>. 
+
+
+* Liste los métodos que debe contener una clase que implementa la interface Bag<T>.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Una clase que implemente la interfaz `Bag<T>` debe contener los siguientes métodos:
+
+1. **`boolean add(T element)`**:
+   - Agrega un elemento al Bag e incrementa en 1 su cardinalidad.
+
+2. **`int occurrencesOf(T element)`**:
+   - Devuelve la cardinalidad del elemento, es decir, el número de veces que el elemento está presente en el Bag. Si el elemento no está en el Bag, devuelve 0.
+
+3. **`void removeOccurrence(T element)`**:
+   - Elimina una referencia del elemento del Bag, es decir, decrementa su cardinalidad en 1. Si el elemento no está presente en el Bag, no hace nada.
+
+4. **`void removeAll(T element)`**:
+   - Elimina todas las referencias de un elemento en el Bag, es decir, pone su cardinalidad a 0. Si el elemento no está presente, no hace nada.
+
+5. **`int size()`**:
+   - Devuelve el número total de elementos en el Bag, es decir, la suma de las cardinalidades de todos los elementos.
+
+------------------------
+
+</details>
+
+* Explique cómo implementaría un Bag<T> usando composición con un Map<K, V>. ¿De qué tipo tendrían que ser las claves y valores del Map?
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+La implementación de un `Bag<T>` usando composición con un `Map<K, V>` es una opción adecuada para gestionar las cardinalidades de los elementos, porque podemos almacenar el elemento como clave (`K`) y su cantidad (cardinalidad) como valor (`V`).
+
+- Las **claves** del `Map` deben ser del tipo `T` (el tipo de los elementos que queremos almacenar en el Bag).
+- Los **valores** del `Map` deben ser del tipo `Integer`, que representará la cantidad de veces que un elemento está presente en el Bag (su cardinalidad).
+
+¿Cómo funciona?
+
+- El **elemento** (`T`) es la clave.
+- La **cardinalidad** (número de veces que aparece) es el valor (`Integer`).
+- Al agregar un elemento al Bag, incrementamos el valor asociado a esa clave (la cardinalidad).
+- Al eliminar una ocurrencia de un elemento, decrementamos el valor asociado a la clave.
+- Cuando eliminamos todas las ocurrencias de un elemento, removemos la clave del `Map`.
+
+------------------------
+
+</details>
+
+* Implemente la interfaz Bag<T>, utilizando AbstractCollection<T> como superclase, y componga con un Map<T, V> (utilizar la clase BagImpl).
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+```java
+import java.util.AbstractCollection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class BagImpl<T> extends AbstractCollection<T> implements Bag<T> {
+
+    // Mapa que mantiene las cardinalidades de los elementos
+    private Map<T, Integer> map;
+
+    /*Usamos un HashMap<T, Integer> llamado map, donde las claves son los elementos (T) y los valores son las cardinalidades de esos elementos (Integer).*/
+    public BagImpl() {
+        map = new HashMap<>();
+    }
+
+    /*Si el elemento ya existe en el map, incrementamos su valor (la cardinalidad).
+      Si el elemento no existe, lo agregamos con una cardinalidad de 1.*/
+    @Override
+    public boolean add(T element) {
+        map.put(element, map.getOrDefault(element, 0) + 1);
+        return true;  // Siempre se agrega correctamente
+    }
+
+    /*Devolvemos el valor asociado a la clave del elemento. Si no está en el map, devolvemos 0 (usando getOrDefault)*/
+    @Override
+    public int occurrencesOf(T element) {
+        return map.getOrDefault(element, 0);
+    }
+
+    /*Si el elemento está en el map, decrementamos su cardinalidad. Si la cardinalidad llega a 0, eliminamos la clave del map.*/
+    @Override
+    public void removeOccurrence(T element) {
+        if (map.containsKey(element)) {
+            int count = map.get(element);
+            if (count > 1) {
+                map.put(element, count - 1);  // Decrementamos la cardinalidad
+            } else {
+                map.remove(element);  // Si la cardinalidad es 1, lo eliminamos
+            }
+        }
+    }
+
+    /*Eliminamos la clave y su valor del map.*/
+    @Override
+    public void removeAll(T element) {
+        map.remove(element);  // Elimina todas las ocurrencias de este elemento
+    }
+
+    /*Iteramos sobre los valores del map (las cardinalidades) y sumamos todas las cantidades para obtener el tamaño total del Bag.*/
+    @Override
+    public int size() {
+        int totalSize = 0;
+        for (int count : map.values()) {
+            totalSize += count;  // Suma las cardinalidades de todos los elementos
+        }
+        return totalSize;
+    }
+
+    /*Implementamos un iterador para recorrer los elementos del Bag. El iterador repite el mismo elemento según la cantidad de veces que aparece en el map.*/
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private Iterator<Map.Entry<T, Integer>> mapIterator = map.entrySet().iterator();
+            private T currentElement = null;
+            private int occurrencesLeft = 0;
+
+            @Override
+            public boolean hasNext() {
+                return mapIterator.hasNext() || occurrencesLeft > 0;
+            }
+
+            @Override
+            public T next() {
+                if (occurrencesLeft == 0) {
+                    Map.Entry<T, Integer> entry = mapIterator.next();
+                    currentElement = entry.getKey();
+                    occurrencesLeft = entry.getValue();
+                }
+                occurrencesLeft--;
+                return currentElement;
+            }
+        };
+    }
+}
+```
+------------------------
+
+</details>
