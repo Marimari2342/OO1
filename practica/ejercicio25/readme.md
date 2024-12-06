@@ -26,105 +26,93 @@ Clases --> [<code>Aquí</code>](/practica/ejercicio25/src/main/java/ar/edu/unlp/
 
 ------------------------
 
-Necesito generar casos de prueba para las diferentes funcionalidades, como dar de alta servicios, calcular costos de servicios, y calcular la recaudación. Los casos de prueba deben cubrir todas las situaciones posibles en las que el sistema podría comportarse de manera diferente.
+#### Clase: Mascota
 
-#### Casos de prueba para **`recaudacion(LocalDate fecha)`** (calculando la recaudación de una mascota en una fecha dada):
+#### Método: recaudacion(fecha: DateTipe): Real
 
-1. **Particiones equivalentes**:
+#### Casos
 
-   - **Entrada válida (fecha válida):**
-     - Se debe proporcionar una fecha válida que coincida con una fecha de servicio. Esta es la partición "válida".
-   
-   - **Entrada inválida (fecha fuera del rango de los servicios prestados):**
-     - Se debe probar con una fecha que no coincida con ninguna fecha de servicio. Esto simula que no hubo servicios en esa fecha.
+1. En la fecha que se quiere consultar la mascota NO recibió servicios.
 
-   - **Entrada nula (fecha nula):**
-     - Se debe probar con una fecha nula (en caso de que la fecha pueda ser null) para verificar cómo maneja el sistema un valor nulo.
+2. En la fecha que se quiere consultar la mascota recibió 1 servicio.
 
-2. **Valores de borde**:
+3. En la fecha que se quiere consultar la mascota recibió más de 1 servicio.
 
-   - **Fecha de servicio exacta**:
-     - El borde de este caso sería cuando la fecha proporcionada es exactamente el mismo día de un servicio.
-   
-   - **Primero o último servicio**:
-     - Se debe verificar el cálculo con el primer servicio registrado para la mascota y el último servicio registrado. Esto asegura que no haya errores al manejar los extremos de la lista de servicios.
+CASO 1 --> Cuando en la fecha que se quiere consultar la mascota no recibió servicios, en este caso retorna 0.
 
-   - **Fecha de domingo**:
-     - Dado que se aplica un costo adicional si el servicio se realiza en un domingo, se debe probar con una fecha que sea un **domingo** para asegurarse de que el recargo sea correcto.
-
-3. **Casos adicionales**:
-
-   - **Servicios en varias fechas**:
-     - Se debe verificar que el sistema sume correctamente los costos de los servicios prestados en diferentes fechas. Por ejemplo, si la mascota recibió un servicio el 1 de enero y otro el 5 de enero, la recaudación de la fecha 1 de enero debe incluir solo el costo de ese día.
-   
-   - **Mascota con varios servicios en la misma fecha**:
-     - Se debe probar el caso donde una mascota tiene múltiples servicios en el mismo día. El sistema debe sumar correctamente todos los costos de esos servicios.
+CASO 2 y 3 --> Cuando en la fecha que se quiere consultar la mascota recibió 1 o más servicios, en este caso retornaría el monto total recaudado.
 
 ------------------------
 
-### Casos de prueba detallados:
+#### Clase: Guardería
 
-#### Caso de prueba 1: **Calcular la recaudación en una fecha válida**  
-**Descripción**: Verificar que el sistema calcule correctamente la recaudación de una mascota en una fecha específica en la que se le haya prestado al menos un servicio.  
-**Entrada**:  
-  - Fecha de servicio: `2024-12-01`  
-  - Servicios prestados:  
-    - Consulta médica: `$500`  
-    - Fecha de atención: `2024-12-01`  
-**Resultado esperado**:  
-  - Recaudación total para el `2024-12-01` = `$500`.
+#### Método: costoServicio(): Real
 
-#### Caso de prueba 2: **Calcular la recaudación en una fecha no válida**  
-**Descripción**: Verificar que el sistema no considere servicios prestados en fechas diferentes a la proporcionada.  
-**Entrada**:  
-  - Fecha de consulta: `2024-12-01`  
-  - Servicios prestados:  
-    - Consulta médica: `$500`  
-    - Fecha de atención: `2024-12-02`  
-**Resultado esperado**:  
-  - Recaudación para el `2024-12-01` = `$0`.
+#### Casos
 
-#### Caso de prueba 3: **Calcular la recaudación con una fecha nula**  
-**Descripción**: Verificar que el sistema maneje correctamente una fecha nula.  
-**Entrada**:  
-  - Fecha de consulta: `null`  
-**Resultado esperado**:  
-  - El sistema debe retornar un error o un valor predeterminado como `0` o indicar que la fecha es obligatoria.
+1. La guardería se usará 1 día.
 
-#### Caso de prueba 4: **Fecha en domingo (recaudación con recargo por domingo)**  
-**Descripción**: Verificar que el sistema calcule correctamente la recaudación cuando el servicio se prestó en un domingo, aplicando el recargo correspondiente.  
-**Entrada**:  
-  - Fecha de consulta: `2024-12-07` (un domingo)  
-  - Servicios prestados:  
-    - Consulta médica: `$500`  
-    - Fecha de atención: `2024-12-07`  
-**Resultado esperado**:  
-  - Recaudación total = `$500 + $200 (recargo domingo) = $700`.
+2. La guardería se usará más de 1 día.
 
-#### Caso de prueba 5: **Calcular recaudación de múltiples servicios en la misma fecha**  
-**Descripción**: Verificar que el sistema sume correctamente los costos de múltiples servicios prestados el mismo día.  
-**Entrada**:  
-  - Fecha de consulta: `2024-12-01`  
-  - Servicios prestados:  
-    - Consulta médica: `$500`  
-    - Vacunación: `$300`  
-    - Fecha de atención: `2024-12-01`  
-**Resultado esperado**:  
-  - Recaudación total para el `2024-12-01` = `$500 + $300 = $800`.
+3. La mascota no tiene más de 5 servicios previos.
 
-#### Caso de prueba 6: **Primero y último servicio en la lista**  
-**Descripción**: Verificar el comportamiento del sistema al calcular la recaudación de la mascota con el primer y último servicio registrado.  
-**Entrada**:  
-  - Fecha de consulta: `2024-01-01` (primer servicio) y `2024-12-31` (último servicio)  
-  - Servicios prestados:  
-    - Primer servicio: `$400`  
-    - Último servicio: `$600`  
-**Resultado esperado**:  
-  - Recaudación total para el `2024-01-01`: `$400`  
-  - Recaudación total para el `2024-12-31`: `$600`.
+4. La mascota tiene 5 servicios previos.
 
----
+5. La mascota tiene más de 5 servicios previos.
+
+CASO (1-4), (2-4), (1-5), (2-5) --> Cuando la guardería se usó 1 o más días, y la mascota ha recibido 5 o más servicios previos, entonces retorna el monto con el descuento aplicado del 10%.
+
+CASO (1-3), (2-3) --> Cuando la guardería se usó 1 o más días, y la mascota NO ha recibido 5 o más servicios previos, entonces retorna el monto total por el servicio ($500 * cantDías)
+
+------------------------
+
+#### Clase: ServicioMedico
+
+#### Método: costoServicio(): Real
+
+**NO ES NECESARIO** puesto que aunque varía el precio que se cobra dependiendo de que clase heredada lo llama, siempre se ejecuta de igual modo en la clase ServicioMedico.
 
 </details>
 
 * Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
+
+~~~java
+public class MascotaTest {
+
+    @Test
+    public void testRecaudacionSinServicios() {
+        // Caso 1: No tiene servicios en la fecha indicada
+        LocalDate fechaNac = LocalDate.of(2014, 9, 5);
+        Mascota mascota = new Mascota('Pipi', fechaNac, 'gato');
+        LocalDate fecha = LocalDate.of(2024, 12, 6);
+        assertEquals(0, mascota.recaudacion(fecha), "La recaudación debe ser 0 cuando no hay servicios en la fecha.");
+    }
+
+    @Test
+    public void testRecaudacionConUnServicio() {
+        // Caso 2: 1 servicio recibido en la fecha indicada
+        LocalDate fechaNac = LocalDate.of(2014, 9, 5);
+        Mascota mascota = new Mascota('Pipi', fechaNac, 'gato');
+        Servicio servicio = new Guarderia(mascota.getNombre(), 1);
+        mascota.agregarServicio(servicio);
+        LocalDate fecha = LocalDate.of(2024, 12, 6);
+        assertEquals(500, mascota.recaudacion(fecha), "La recaudación debe ser el monto del servicio.");
+    }
+
+    @Test
+    public void testRecaudacionConVariosServicios() {
+        // Caso 3: Más de 1 servicio recibido en la fecha indicada
+        LocalDate fechaNac = LocalDate.of(2014, 9, 5);
+        Mascota mascota = new Mascota('Pipi', fechaNac, 'gato');
+        Servicio servicio1 = new Guarderia(mascota.getNombre(), 1);
+        Servicio servicio2 = new Guarderia(mascota.getNombre(), 2);
+        mascota.agregarServicio(servicio1);
+        mascota.agregarServicio(servicio2);
+        LocalDate fecha = LocalDate.of(2024, 12, 6);
+        assertEquals(500 + 1000, mascota.recaudacion(fecha), "La recaudación debe ser la suma de los costos de los servicios.");
+    }
+
+    //falta testear con y sin descuento, pero es más de lo mismo..... 
+}
+
+~~~
