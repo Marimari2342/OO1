@@ -1291,7 +1291,9 @@ Boolean esta = (fechaActual.isAfter(inicio) && fechaActual.isBefore(fin));
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
 ~~~java
-/*El método until() de LocalDate permite calcular la diferencia entre dos fechas. Para obtener la diferencia en días, meses o años, se puede usar este método junto con las unidades adecuadas de la clase java.time.temporal.ChronoUnit.*/
+/*El método until() de LocalDate permite calcular la diferencia entre dos fechas. Para obtener la
+ *diferencia en días, meses o años, se puede usar este método junto con las unidades adecuadas de 
+ *la clase java.time.temporal.ChronoUnit.*/
 
 //Fechas
 LocalDate fechaUno = LocalDate.of(1972, 12, 15);
