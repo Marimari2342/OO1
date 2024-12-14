@@ -1273,6 +1273,60 @@ public class PlazoFijo implements Inversion{
 
 ---------------------
 
+## 🟡 Ejercicio 12 --> Volumen y superficie de sólidos
+
+Una empresa siderúrgica quiere introducir en su sistema de gestión nuevos cálculos de volumen y superficie exterior para las piezas que produce. El volumen le sirve para determinar cuánto material ha utilizado. La superficie exterior le sirve para determinar la cantidad de pintura que utilizó para pintar las piezas.
+
+El siguiente diagrama UML muestra el diseño actual del sistema. En el mismo puede observarse que un ReporteDeConstruccion tiene la lista de las piezas que fueron construidas. Pieza es una clase abstracta.
+
+![uml](/practica/cosas/img03.png)
+
+### Tareas:
+
+a) Complete el diseño e implemente: Su tarea es completar el diseño e implementarlo siguiendo las especificaciones que se exponen a continuación:
+
+~~~java
+getVolumenDeMaterial(nombreDeMaterial: String)
+    /*Recibe como parámetro un nombre de material (un string, por ejemplo 'Hierro').
+    Retorna la suma de los volúmenes de todas las piezas hechas en ese material*/
+
+getSuperficieDeColor(unNombreDeColor: String)
+    /*Recibe como parámetro un color (un string, por ejemplo 'Rojo'). Retorna la suma de
+    las superficies externas de todas las piezas pintadas con ese color.*/
+~~~ 
+
+b) Pruebas automatizadas: Implemente los tests (JUnit) que considere necesarios.
+
+c) Discuta con el ayudante: Es probable que note una similitud entre este ejercicio y el de "Figuras y cuerpos" que realizó anteriormente, ya que en ambos se pueden construir cilindros y prismas rectangulares. Sin embargo las implementaciones varían. Enumere las diferencias y similitudes entre ambos ejercicios y luego consulte con el ayudante.
+
+Respuesta <code>[AQUI](/practica/ejercicio12/src/main/java/ar/edu/unlp/info/oo1/ej12_volumen/)</code>
+
+---------------------
+
+## 🟡 Ejercicio 13 --> Cliente de Correo
+
+El diagrama de clases de UML que se muestra a continuación documenta parte del diseño simplificado de un cliente de correo electrónico.
+
+![uml](/practica/cosas/img04.png)
+
+### Tareas:
+
+a) Modele e implemente
+
+* Complete el diseño y el diagrama de clases UML.
+
+* Implemente en Java de la funcionalidad requerida.
+
+b) Pruebas automatizadas
+
+* Diseñe los casos de prueba teniendo en cuenta los conceptos de valores de borde y particiones equivalentes vistos en la teoría.
+
+* Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
+
+Respuesta <code>[AQUI](/practica/ejercicio13/src/main/java/ar/edu/unlp/info/oo1/ej13_correo/)</code>
+
+---------------------
+
 ## 🟡 Ejercicio 14 --> Intervalo de tiempo
 
 En Java, las fechas se representan normalmente con instancias de la clase java.time.LocalDate. Se pueden crear con varios métodos "static" como por ejemplo LocalDate.now().
