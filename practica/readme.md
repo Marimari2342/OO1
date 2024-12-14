@@ -1368,3 +1368,93 @@ public class DateLapse {
 ~~~
 
 </details>
+
+b) Pruebas automatizadas
+
+Diseñe los casos de prueba teniendo en cuenta los conceptos de valores de borde y particiones equivalentes vistos en la teoría.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Casos de prueba para Clase --> DateLapse
+
+Método --> includesDate(LocalDate other) 
+
+Casos (No incluyendo los bordes en la función)
+
+1. La fecha pasada como parámetro se encuentra dentro del intervalo de tiempo determinado por From y To. --> En este caso retornaría TRUE
+
+2. La fecha pasada como parámetro NO se encuentra dentro del intervalo de tiempo determinado por From y To. --> En este caso retornaría FALSE
+
+3. La fecha pasada como parámetro es igual a la fecha From. --> En este caso retornaría FALSE
+
+4. La fecha pasada como parámetro es igual a la fecha To. --> En este caso retornaría FALSE
+
+</details>
+
+Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class DateLapseTest {
+
+    // Test para verificar si la fecha está dentro del intervalo
+    @Test
+    public void testEstaEnIntervalo() {
+
+        // Crear un rango de fechas
+        DateLapse dateLapse = new DateLapse(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31));
+
+        // Fecha dentro del intervalo
+        LocalDate testDate = LocalDate.of(2020, 6, 15);
+
+        // Verificar que la fecha está dentro del intervalo
+        assertTrue(dateLapse.includesDate(testDate), "La fecha debe estar dentro del intervalo.");
+    }
+
+    // Test para verificar si la fecha está fuera del intervalo
+    @Test
+    public void testNOEstaEnIntervalo() {
+        // Crear un rango de fechas
+        DateLapse dateLapse = new DateLapse(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31));
+
+        // Fecha fuera del intervalo
+        LocalDate testDate = LocalDate.of(2021, 1, 1);
+
+        // Verificar que la fecha no está dentro del intervalo
+        assertFalse(dateLapse.includesDate(testDate), "La fecha no debe estar dentro del intervalo.");
+    }
+
+    // Test para verificar si la fecha es igual a 'From' (No inclusiva)
+    @Test
+    public void testBordeFrom() {
+        // Crear un rango de fechas
+        DateLapse dateLapse = new DateLapse(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31));
+
+        // Fecha igual a la fecha 'From'
+        LocalDate testDate = LocalDate.of(2020, 1, 1);
+
+        // Verificar que la fecha no está dentro del intervalo (ya que 'From' no es inclusivo)
+        assertFalse(dateLapse.includesDate(testDate), "La fecha no debe estar dentro del intervalo.");
+    }
+
+    // Test para verificar si la fecha es igual a 'To' (No inclusiva)
+    @Test
+    public void testBordeTo() {
+        // Crear un rango de fechas
+        DateLapse dateLapse = new DateLapse(LocalDate.of(2020, 1, 1), LocalDate.of(2020, 12, 31));
+
+        // Fecha igual a la fecha 'To'
+        LocalDate testDate = LocalDate.of(2020, 12, 31);
+
+        // Verificar que la fecha no está dentro del intervalo (ya que 'To' no es inclusivo)
+        assertFalse(dateLapse.includesDate(testDate), "La fecha no debe estar dentro del intervalo.");
+    }
+}
+~~~
+
+</details>
