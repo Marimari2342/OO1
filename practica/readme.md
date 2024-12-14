@@ -1260,7 +1260,8 @@ En Java, las fechas se representan normalmente con instancias de la clase java.t
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
 ~~~java
-/*Para crear una fecha específica, se puede usar el método estático LocalDate.of(), pasando año, mes y día como parámetros*/
+/*Para crear una fecha específica, se puede usar el método estático LocalDate.of(), pasando 
+ *año, mes y día como parámetros*/
 LocalDate fecha = LocalDate.of(1972, 9, 15);
 ~~~
 
