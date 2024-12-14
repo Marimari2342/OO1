@@ -23,6 +23,8 @@ Enlace a la resolución de la [*Primera Parte*](/practica/ejercicio01/src/main/j
 
 ***Una vez que su implementación pasa los tests de la primera parte puede utilizar la ventana que se muestra a continuación, la cual permite inspeccionar y manipular el post (definir su texto, hacer like / dislike y marcarlo como destacado).***
 
+---------------------
+
 ## 🟡 Ejercicio 2 --> Balanza Electrónica
 
 ***En términos generales, la Balanza electrónica recibe productos (uno a uno), y calcula dos totales: peso total y precio total. Además la balanza puede poner en cero todos sus valores.***
@@ -192,6 +194,8 @@ public class Ticket {
 
 </details>
 
+---------------------
+
 ## 🟡 Ejercicio 3 --> Presupuestos
 
 ***Un presupuesto se utiliza para detallar los precios de un conjunto de productos que se desean adquirir. Se realiza para una fecha específica y es solicitado por un cliente, proporcionando una visión de los costos asociados.***
@@ -314,6 +318,8 @@ public class Item {
 
 </details>
 
+---------------------
+
 ## 🟡 Ejercicio 4 --> Balanza Mejorada
 
 ***Realizando el ejercicio de los presupuestos, aprendimos que un objeto puede tener una colección de otros objetos. Con esto en mente, ahora queremos mejorar la balanza implementada  en el ejercicio 2.***
@@ -399,6 +405,8 @@ public class Balanza {
 ~~~
 
 </details>
+
+---------------------
 
 ## 🟡 Ejercicio 5 --> Figuras y Cuerpos
 
@@ -532,6 +540,8 @@ public class Cuerpo3D {
 
 </details>
 
+---------------------
+
 ## 🟡 Ejercicio 6 --> Genealogía salvaje
 
 En una reserva de vida salvaje, los cuidadores quieren llevar registro detallado de los animales que cuidan y sus familias. Para ello nos han pedido ayuda.
@@ -656,6 +666,8 @@ public class Mamifero {
 
 Siguiendo los ejemplos de ejercicios anteriores, ejecute las pruebas automatizadas provistas. 
 
+---------------------
+
 ## 🟡 Ejercicio 7 --> Red de Alumbrado
 
 Imagine una red de alumbrado donde cada farola está conectada a una o varias vecinas formando un [grafo conexo](https://es.wikipedia.org/wiki/Grafo_conexo). Cada una de las farolas tiene un interruptor. Es suficiente con encender o apagar una farola cualquiera para que se enciendan o apaguen todas las demás. Sin embargo, si se intenta apagar una farola apagada (o si se intenta encender una farola encendida) no habrá ningún efecto, ya que no se propagará esta acción hacia las vecinas.
@@ -749,6 +761,8 @@ public class Farola {
 
 Utilice los tests provistos por la cátedra para probar las implementaciones del punto 2.
 
+---------------------
+
 ## 🟡 Ejercicio 8 --> Method lookup con Empleados
 
 Sea la jerarquía de Empleado como muestra la figura de la izquierda, cuya implementación de referencia se incluye en la tabla de la derecha. Analice cada uno de los siguientes fragmentos de código dados y resuelva las tareas indicadas abajo.
@@ -835,6 +849,8 @@ Los **metodos ejecutados** son:
 El **valor de la variable** sueldoBasicoDeAlan será de 35000+13500+8000=56500
 
 </details>
+
+---------------------
 
 ## 🟡 Ejercicio 9 --> Cuenta con ganchos
 
@@ -1020,6 +1036,8 @@ Reflexione, charle con el ayudante y responda a las siguientes preguntas.
 
 Escriba los tests de unidad que crea necesarios para validar que su implementación funciona adecuadamente.
 
+---------------------
+
 ## 🟡 Ejercicio 10 --> Job Scheduler
 
 El JobScheduler es un objeto cuya responsabilidad es determinar qué trabajo debe resolverse a continuación. El siguiente diseño ayuda a entender cómo funciona la implementación actual del JobScheduler.
@@ -1039,6 +1057,8 @@ En la implementación actual del método <code>next()</code>, el JobScheduler ut
 (a) Analice el código existente: utilice el código y los tests provistos por la cátedra y aplique lo aprendido (en particular en relación a herencia y polimorfismo) para eliminar los problemas mencionados. Siéntase libre de agregar nuevas clases como considere necesario. También puede cambiar la forma en la que los objetos se crean e inicializan. Asuma que una vez elegida una estrategia para un scheduler no puede cambiarse.
 
 (b) Verifique su solución con las pruebas automatizadas: sus cambios probablemente hagan que los tests dejen de funcionar. Corríjalos y mejórelos como sea necesario.
+
+---------------------
 
 ## 🟡 Ejercicio 11 --> El Inversor
 
@@ -1251,6 +1271,8 @@ public class PlazoFijo implements Inversion{
 ~~~
 </details>
 
+---------------------
+
 ## 🟡 Ejercicio 14 --> Intervalo de tiempo
 
 En Java, las fechas se representan normalmente con instancias de la clase java.time.LocalDate. Se pueden crear con varios métodos "static" como por ejemplo LocalDate.now().
@@ -1458,3 +1480,48 @@ public class DateLapseTest {
 ~~~
 
 </details>
+
+### Ejercicio 14b) Intervalo de tiempo
+
+Asumiendo que implementó la clase DateLapse con dos variables de instancia “from” y “to”, realice otra implementación de la clase para que su representación sea a través de los atributos “from” y “sizeInDays” y coloquela en otro paquete. Es decir, debe basar su nueva implementación en estas variables de instancia solamente.
+
+Sugerencia: Considere definir una interfaz Java para que ambas soluciones la implementen.
+
+Los cambios en la estructura interna de un objeto sólo deben afectar a la implementación de sus métodos. Estos cambios deben ser transparentes para quien le envía mensajes, no debe notar ningún cambio y seguir usándolo de la misma forma. Tenga en cuenta que los tests que implementó en el ejercicio anterior deberían pasar sin que se requiera realizar modificaciones.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+import java.time.LocalDate;
+
+public class DateLapseSize implements DateLapseInterfaz {
+    
+    //variables de instancia
+    private LocalDate from;     //fecha de inicio del rango
+    private int sizeInDays;     //diferencia de días
+
+    //atributos
+    public DateLapseSize (LocalDate from, int size){
+        this.from=from;
+        this.sizeInDays=size;
+    }
+
+    //metodos
+    public LocalDate getFrom(){     // Retorna la fecha de inicio
+        return this.from;
+    }
+
+    public int sizeInDays(){       // Retorna cantidad días entre las fechas 'from' y 'to'
+        return this.sizeInDays;
+    }
+
+    public boolean includesDate(LocalDate other){ // Verifica si la fecha está dentro del intervalo
+        LocalDate to = this.getFrom().plusDays(this.sizeInDays());
+        return (other.isAfter(getFrom()) && other.isBefore(to));
+    }
+
+}
+~~~
+</details>
+
+---------------------

@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class DateLapse {
+public class DateLapse implements DateLapseInterfaz{
     
     //variables de instancia
     private LocalDate from; //fecha de inicio del rango
