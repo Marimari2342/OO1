@@ -1639,3 +1639,114 @@ Respuesta <code>[AQUI](/practica/ejercicio15/src/main/java/ar/edu/unlp/info/oo1/
 c. Pruebas automatizadas: implemente tests automatizados utilizando JUnit para verificar su solución.
 
 ---------------------
+
+## 🟡 Ejercicio 16 --> Filtered Set
+
+En la teoría de colecciones se explicaron algunos tipos de colecciones; en particular, el Set (java.util.Set) es una colección que no admite duplicados y no tiene índice para sus elementos.
+
+Implemente una clase EvenNumberSet (conjunto de números pares). Esta clase se comporta casi exactamente igual a Set, con la diferencia que únicamente permite agregar números enteros que sean pares. Por simplicidad, considere únicamente el tipo de datos Integer para su solución (ignore el resto de tipos de datos numéricos). Tenga en cuenta que la clase EvenNumberSet debe implementar la interface Set</E/> de Java. Esto significa que a las variables de tipo Set</Integer/> se les puede asignar un objeto concreto de tipo EvenNumberSet y luego utilizarlo enviando los mensajes que están
+definidos en el protocolo de Set</E/>.
+
+El siguiente fragmento de código ejemplifica cómo se podría usar la clase EvenNumberSet:
+
+~~~java
+Set<Integer> numbers = new EvenNumberSet();
+// inicialmente el Set está vacío => []
+numbers.add(1); // No es par, entonces no se agrega => []
+numbers.add(2); // Es par, se agrega al set => [2]
+numbers.add(4); // Es par, se agrega al set => [2, 4]
+numbers.add(2); // Es par, pero ya está en el set, no se agrega => [2, 4]
+~~~
+
+Evalúe las distintas opciones para implementar la clase EvenNumberSet. Para evitar reinventar la rueda, considere reutilizar alguna de las clases existentes en Java que ofrezcan funcionalidades similares.
+
+### Tareas:
+
+a. Investigue qué clases se pueden utilizar para implementar la clase EvenNumberSet. Consulte la documentación de Set.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+En Java, la interfaz Set es parte del paquete java.util y tiene varias implementaciones comunes:
+
+**HashSet:** Una implementación de Set basada en una tabla hash. No mantiene el orden de los elementos y no permite duplicados.
+
+**LinkedHashSet:** Similar a HashSet, pero mantiene el orden de inserción.
+
+**TreeSet:** Una implementación de Set que mantiene los elementos en orden ascendente.
+
+Dado que la clase EvenNumberSet debe comportarse como un Set<Integer>, lo más sencillo es extender alguna de las implementaciones existentes de Set, como HashSet. De esta forma, aprovechamos las funcionalidades estándar de Set y añadimos la validación para asegurarnos de que solo se agreguen números pares.
+
+</details>
+
+b. Explique brevemente cómo propone utilizar las clases investigadas anteriormente para implementar su solución. Por ejemplo:
+
+* “Se debe subclasificar una determinada clase y redefinir un método para que haga lo siguiente”.
+
+* “Se debe crear una nueva clase que contenga un objeto de un determinado tipo al cual se le delegará está responsabilidad”.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+La idea es subclasificar HashSet y sobrecargar el método add(). De esta forma, delegamos las funcionalidades generales del conjunto (como verificar duplicados) a HashSet, pero nos aseguramos de que solo se puedan agregar números enteros que sean pares. Si un número es impar, lo ignoramos.
+
+Pasos:
+
+Herencia: Nuestra clase va a heredar de HashSet<Integer>, ya que esta clase proporciona la funcionalidad de conjunto sin duplicados.
+
+Sobrecarga de add(): En lugar de agregar directamente un número al conjunto, primero verificamos si el número es par.
+
+Delegación: Si el número es par, delegamos el comportamiento de agregarlo al HashSet.
+
+</details>
+
+c. Implemente en Java las alternativas que haya propuesto.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+import java.util.HashSet;
+
+public class EvenNumberSet extends HashSet<Integer>{
+    
+    /*variables de instancia y constructor --> Ya los tengo en HashSet, no necesito ponerlos acá*/
+    
+    //metodos
+    /*Sobrecarga de add(): En lugar de agregar directamente un número al conjunto, primero 
+    verificamos si el número es par.*/
+    public boolean add(Integer num){
+        return (int)num % 2 == 0 ? super.add(num): false;
+    }
+}
+~~~
+
+</details>
+
+d. Implemente tests automatizados utilizando JUnit para verificar sus implementaciones.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class EvenNumberSetTest {
+
+    @Test
+    public void testAgregarNumeroPar() {
+        Set<Integer> numbers = new EvenNumberSet();
+        assertTrue(numbers.add(2), "El número par debe ser agregado");
+        assertFalse(numbers.add(2), "El número par duplicado no debe ser agregado");
+    }
+
+    @Test
+    public void testAgregarNumeroImpar() {
+        Set<Integer> numbers = new EvenNumberSet();
+        assertFalse(numbers.add(1), "El número impar no debe ser agregado");
+    }
+}
+~~~
+
+</details>
+
+e. Compare las soluciones y liste las ventajas y desventajas de cada una.
+
+---------------------
