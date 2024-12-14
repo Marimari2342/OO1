@@ -1579,3 +1579,55 @@ public class DateLapseSize implements DateLapseInterfaz {
 </details>
 
 ---------------------
+
+## 🟡 Ejercicio 15 --> Distribuidora Eléctrica
+
+Una distribuidora eléctrica desea gestionar los consumos de sus usuarios para la emisión de facturas de cobro. De cada usuario se conoce su nombre y domicilio. Se considera que cada usuario sólo puede tener un único domicilio en donde se registran los consumos.
+
+Los consumos de los usuarios se dividen en dos componentes:
+
+* Consumo de energía activa: tiene un costo asociado para el usuario. Se mide en kWh (kilowatt/hora).
+
+* Consumo de energía reactiva: no genera ningún costo para el usuario, es decir, se utiliza solamente para determinar si hay alguna bonificación. Se mide en kVArh ( kilo voltio-amperio reactivo hora).
+
+Se cuenta con un cuadro tarifario que establece el precio del kWh para calcular el costo del consumo de energía activa. Este cuadro tarifario puede ser ajustado periódicamente según sea necesario (por ejemplo, para reflejar cambios en los costos).
+
+Para emitir la factura de un cliente se tiene en cuenta solo su último consumo registrado. Los datos que debe contener la factura son los siguientes:
+
+* El usuario a quien se está cobrando.
+
+* La fecha de emisión.
+
+* La bonificación, sí aplica.
+
+* El monto final de la factura: se calcula restando la bonificación al costo del consumo:
+
+* (a) El costo del consumo se calcula multiplicando el consumo de energía activa por el precio del kWh proporcionado por el cuadro tarifario.
+
+* (b) Se calcula su factor de potencia para determinar si hay alguna bonificación aplicable. Si el factor de potencia estimado (fpe) del último consumo del usuario es mayor a 0.8, el usuario recibe una bonificación del 10%.
+
+El factor de potencia estimado se calcula de acuerdo a la siguiente fórmula:
+
+~~~java
+double fpe = enAct / (Math.sqrt( Math.pow(enAct,2) + Math.pow(enReac,2) ));
+~~~
+
+### Tareas:
+
+a. Analice el problema: realice el modelo de dominio detallando, cuando sea posible, para cada clase conceptual identificada:
+
+* La categoría correspondiente a la clase
+
+* Los atributos candidatos de la clase
+
+* Las asociaciones entre las clases conceptuales
+
+b. Modele e implemente
+
+* Realice el diagrama de clases UML para su solución
+
+* Implemente en Java de la funcionalidad requerida.
+
+c. Pruebas automatizadas: implemente tests automatizados utilizando JUnit para verificar su solución.
+
+---------------------
