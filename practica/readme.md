@@ -1626,7 +1626,13 @@ b. Modele e implemente
 
 * Realice el diagrama de clases UML para su solución
 
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+</details>
+
 * Implemente en Java de la funcionalidad requerida.
+
+Respuesta <code>[AQUI](/practica/ejercicio15/src/main/java/ar/edu/unlp/info/oo1/ej15_distribuidora/)</code>
 
 c. Pruebas automatizadas: implemente tests automatizados utilizando JUnit para verificar su solución.
 
