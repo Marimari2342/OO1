@@ -1628,6 +1628,8 @@ b. Modele e implemente
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
+![umlpunto15](/practica/ejercicio15/uml.jpg)
+
 </details>
 
 * Implemente en Java de la funcionalidad requerida.

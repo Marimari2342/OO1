@@ -1,22 +1,18 @@
 
-import java.time.LocalDate;
 
 public class Consumo {
     
     //variables de instancia
     private double energiaAct;
     private double energiaReac;
-    private LocalDate fecha;
 
     //constructor
     public Consumo (double energiaAct, double energiaReac){
         this.energiaAct=energiaAct;
         this.energiaReac=energiaReac;
-        this.fecha=LocalDate.now();
     }
 
     //metodos
-
     public double getEnergiaAct(){
         return this.energiaAct;
     }
