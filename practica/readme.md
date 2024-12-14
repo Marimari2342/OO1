@@ -1250,3 +1250,118 @@ public class PlazoFijo implements Inversion{
 }
 ~~~
 </details>
+
+## 🟡 Ejercicio 14 --> Intervalo de tiempo
+
+En Java, las fechas se representan normalmente con instancias de la clase java.time.LocalDate. Se pueden crear con varios métodos "static" como por ejemplo LocalDate.now().
+
+* Investigue cómo hacer para crear una fecha determinada, por ejemplo 15/09/1972. 
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+/*Para crear una fecha específica, se puede usar el método estático LocalDate.of(), pasando año, mes y día como parámetros*/
+LocalDate fecha = LocalDate.of(1972, 9, 15);
+~~~
+
+</details>
+
+* Investigue cómo hacer para determinar si la fecha de hoy se encuentra entre las fechas 15/12/1972 y 15/12/2032. Sugerencia: vea los métodos permiten comparar LocalDates y que retornan booleans.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+/*Para comparar fechas, se pueden usar los métodos isBefore(), isAfter(), y isEqual()*/
+
+//Fechas inicio y fin
+LocalDate inicio = LocalDate.of(1972, 12, 15);
+LocalDate fin = LocalDate.of(2032, 12, 15);
+
+//Fecha actual
+LocalDate fechaActual = LocalDate.now();
+
+//Verificar si fecha actual se encuentra entre el intervalo dado
+Boolean esta = (fechaActual.isAfter(inicio) && fechaActual.isBefore(fin));
+~~~
+
+</details>
+
+* Investigue cómo hacer para calcular el número de días entre dos fechas. Lo mismo para el número de meses y de años Sugerencia: vea el método until.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+/*El método until() de LocalDate permite calcular la diferencia entre dos fechas. Para obtener la diferencia en días, meses o años, se puede usar este método junto con las unidades adecuadas de la clase java.time.temporal.ChronoUnit.*/
+
+//Fechas
+LocalDate fechaUno = LocalDate.of(1972, 12, 15);
+LocalDate fechaDos = LocalDate.now();
+
+// Calcular la diferencia en días
+long dias = fechaUno.until(fechaDos, ChronoUnit.DAYS);
+
+
+// Calcular la diferencia en meses
+long meses = fechaUno.until(fechaDos, ChronoUnit.MONTHS);
+
+
+// Calcular la diferencia en años
+long años = fechaUno.until(fechaDos, ChronoUnit.YEARS);
+~~~
+
+</details>
+
+Tenga en cuenta que los métodos de LocalDate colaboran con otros objetos que están definidos a partir de enums, clases e interfaces de java.time; por ejemplo java.time.temporal.ChronoUnit.DAYS
+
+### Tareas:
+
+(a) Implemente la clase DateLapse (Lapso de tiempo). Un objeto DateLapse representa el lapso de tiempo entre dos fechas determinadas. La primera fecha se conoce como “from” y la segunda como “to”. Una instancia de esta clase entiende los mensajes:
+
+~~~java
+public LocalDate getFrom() //Retorna la fecha de inicio del rango
+public LocalDate getTo() //Retorna la fecha de fin del rango
+public int sizeInDays() //retorna la cantidad de días entre la fecha 'from' y la fecha 'to'
+public boolean includesDate(LocalDate other) //recibe un objeto LocalDate y retorna true si la fecha está entre el from y el to del receptor y false en caso contrario”.
+~~~
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+~~~java
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
+public class DateLapse {
+    
+    //variables de instancia
+    private LocalDate from; //fecha de inicio del rango
+    private LocalDate to;   //fecha de fin del rango
+
+    //constructor
+    public DateLapse(LocalDate from, LocalDate to){
+        this.from=from;
+        this.to=to;
+    }
+
+    //metodos
+    public LocalDate getFrom() {    //Retorna la fecha de inicio del rango
+        return this.from;
+    }
+
+    public LocalDate getTo() {      //Retorna la fecha de fin del rango
+        return this.to;
+    }
+
+    public int sizeInDays() {       //retorna cantidad de días entre las fechas 'from' y 'to'
+        return (int) getFrom().until(getTo(), ChronoUnit.DAYS);
+    }
+
+    public boolean includesDate(LocalDate other) { //recibe un objeto LocalDate y retorna T/F si esta en el intervalo de tiempo
+        return (other.isAfter(getFrom()) && other.isBefore(getTo()));
+        /*No incluye los bordes, si los quiero incluir hago -->
+        * return ((other.isAfter(getFrom())||other.isEqual(getFrom())) && (other.isBefore(getTo())||other.isEqual(getTo())));
+        */
+    }
+}
+~~~
+
+</details>
