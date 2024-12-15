@@ -1798,8 +1798,6 @@ Tareas:
 
 * DateLapse: Representa las fechas asociadas a las reservas.
 
-* Ingreso: Representa los ingresos generados por las reservas realizadas.
-
 ### Relaciones:
 
 * Un Usuario puede tener muchas Propiedades.
@@ -1814,12 +1812,9 @@ Tareas:
 
 ~~~
 Usuario ----> Propiedad
-  |                |
-  |                V
-  |            Reserva
-  |
-  V
-Ingreso
+                   |
+                   V
+               Reserva
 ~~~
 
 </details>

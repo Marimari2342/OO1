@@ -32,4 +32,8 @@ public class DateLapse implements DateLapseInterfaz{
         * return ((other.isAfter(getFrom())||other.isEqual(getFrom())) && (other.isBefore(getTo())||other.isEqual(getTo())));
         */
     }
+
+    public boolean estaOcupada (DateLapse periodo){
+        return this.getTo().isBefore(periodo.getFrom()) || this.getFrom().isAfter(periodo.getTo());
+    }
 }

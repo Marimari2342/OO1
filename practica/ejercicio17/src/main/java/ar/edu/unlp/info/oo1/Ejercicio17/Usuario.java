@@ -20,6 +20,19 @@ public class Usuario {
 
     //metodos
     public void crearReserva(Reserva reserva, DateLapse periodo){
-        reserva.getPropiedad().consultaDisponibilidad(periodo) ? reserva.getPropiedad().crearReserva(reserva): System.out.println("Periodo no disponible");;
+        if (reserva.getPropiedad().consultaDisponibilidad(periodo)){
+            reserva.getPropiedad().crearReserva(reserva);
+        }
+        else System.out.println("Periodo no disponible");
+    }
+
+    public void cancelarReserva(Reserva reserva){
+        reserva.getPropiedad().cancelarReserva(reserva);
+    }
+
+    public double calcularIngreso(DateLapse periodo){
+        return propiedades.stream() //stream de propiedades
+                .mapToDouble(propiedad -> propiedad.calcularIngreso(periodo)) //mapeo y calculo
+                .sum(); //sumo
     }
 }
