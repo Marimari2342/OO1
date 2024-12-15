@@ -27,10 +27,9 @@ public class DateLapse{
     }
 
     public boolean includesDate(LocalDate other) { //recibe un objeto LocalDate y retorna T/F si esta en el intervalo de tiempo
-        return (other.isAfter(getFrom()) && other.isBefore(getTo()));
-        /*No incluye los bordes, si los quiero incluir hago -->
-        * return ((other.isAfter(getFrom())||other.isEqual(getFrom())) && (other.isBefore(getTo())||other.isEqual(getTo())));
-        */
+        /*return (other.isAfter(getFrom()) && other.isBefore(getTo())); <- No incluye los bordes
+        Si los quiero incluir hago -->*/
+        return ((other.isAfter(getFrom())||other.isEqual(getFrom())) && (other.isBefore(getTo())||other.isEqual(getTo())));
     }
 
     public boolean estaOcupada (DateLapse periodo){
