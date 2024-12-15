@@ -1822,11 +1822,17 @@ Usuario ----> Propiedad
 2. Realice el diagrama de clases UML
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+![umlpunto17](/practica/ejercicio17/uml17.jpg)
+
 </details>
 
 3. Implemente en Java de la funcionalidad requerida.
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Respuesta <code>[AQUI](/practica/ejercicio17/src/main/java/ar/edu/unlp/info/oo1/Ejercicio17/)</code>
+
 </details>
 
 4. Implemente en JUnit pruebas automatizadas en donde:
