@@ -3,8 +3,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import main.java.ar.edu.unlp.info.oo1.DateLapse.DateLapse;
-
 public class Propiedad {
     
     //variables de instancia
@@ -12,13 +10,15 @@ public class Propiedad {
     private String descripcion;
     private double precio;
     private List<Reserva> reservas;
+    private Cancelacion politCancelacion;
 
     //constructor
-    public Propiedad(String direccion, String descripcion, double precio){
+    public Propiedad(String direccion, String descripcion, double precio, Cancelacion politCanc){
         this.direccion=direccion;
         this.descripcion=descripcion;
         this.precio=precio;
-        reservas = new LinkedList<Reserva>();
+        this.reservas = new LinkedList<Reserva>();
+        this.politCancelacion = politCanc;
     }
 
     //metodos

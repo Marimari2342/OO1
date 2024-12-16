@@ -35,4 +35,8 @@ public class DateLapse{
     public boolean estaOcupada (DateLapse periodo){
         return this.getTo().isBefore(periodo.getFrom()) || this.getFrom().isAfter(periodo.getTo());
     }
+
+    public int diasQueFaltan(LocalDate dia){
+        return (int) dia.until(getFrom(), ChronoUnit.DAYS);
+    }
 }

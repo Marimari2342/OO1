@@ -1831,7 +1831,7 @@ Usuario ----> Propiedad
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
-Respuesta <code>[AQUI](/practica/ejercicio17/src/main/java/ar/edu/unlp/info/oo1/Ejercicio17/)</code>
+Respuesta <code>[AQUI](/practica/ejercicio17y18/src/main/java/ar/edu/unlp/info/oo1/Ejercicio17/)</code>
 
 </details>
 
@@ -1865,6 +1865,70 @@ Al momento de reembolsar, las políticas se comportan de la siguiente manera:
 Actualice su diseño, implementación y tests de acuerdo a los nuevos requerimientos.
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Uso una interfaz y tres clases que la implementan
+
+### Interfaz Cancelacion 
+~~~java
+public interface Cancelacion {
+
+    //metodos
+    double reembolso(Reserva reserva);
+}
+~~~
+
+### Clase CancelacionFlexible
+~~~java
+import java.time.LocalDate;
+
+public class CancelacionFlexible implements Cancelacion {
+    
+    //metodos
+    public double reembolso(Reserva reserva){
+        return reserva.getFecha().includesDate(LocalDate.now()) ? 0: reserva.calcularPrecio();
+    }
+}
+~~~
+
+### Clase CancelacionModerada
+~~~java
+import java.time.LocalDate;
+
+public class CancelacionModerada implements Cancelacion {
+    
+    //metodos
+    public double reembolso(Reserva reserva){
+        int cant=reserva.getFecha().diasQueFaltan(LocalDate.now());
+        if (reserva.getFecha().includesDate(LocalDate.now())||cant<2){
+            return 0;
+        }
+        return cant>=7 ? reserva.calcularPrecio(): reserva.calcularPrecio()*0.5;
+    }
+}
+~~~
+
+### Clase CancelacionEstricta
+~~~java
+public class CancelacionEstricta implements Cancelacion {
+ 
+    //metodos
+    public double reembolso(Reserva reserva){
+        return 0;
+    }
+}
+~~~
+
+Además agrego un nuevo método a la **Clase DateLapse**
+~~~java
+public int diasQueFaltan(LocalDate dia){
+    return (int) dia.until(getFrom(), ChronoUnit.DAYS);
+}
+~~~
+
+Y agrego la Politica de Cancelación como variable de instancia en la **Clase Propiedad**, y la defino en el constructor.
+
+Ejercicio completo <code>[AQUI](/practica/ejercicio17y18/src/main/java/ar/edu/unlp/info/oo1/Ejercicio17/)</code>
+
 </details>
 
 ---------------------
