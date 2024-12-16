@@ -1866,6 +1866,10 @@ Actualice su diseño, implementación y tests de acuerdo a los nuevos requerimie
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
+### UML completo (Ejercicios 17 y 18)
+
+![uml17y18](/practica/ejercicio17y18/uml17y18.jpg)
+
 Uso una interfaz y tres clases que la implementan
 
 ### Interfaz Cancelacion 
