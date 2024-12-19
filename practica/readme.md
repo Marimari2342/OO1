@@ -2029,3 +2029,41 @@ Casos:
 c) Es probable que los montos utilizados para los cálculos le hayan quedado fijos dentro del código (hardcoded). Piense qué pasaría si al calcular el monto a pagar se proveyera (como un parámetro más) el "cuadro tarifario". ¿Cómo sería ese objeto? ¿Qué responsabilidad le podría delegar? ¿Cómo haríamos para tener montos diferentes para los distintos países en los envíos internacionales según los pesos de los envíos?
 
 ---------------------
+
+## 🟡 Ejercicio 20. Liquidación de haberes
+
+Estamos desarrollando una aplicación para realizar la liquidación de haberes de los empleados de una empresa. De estos se conoce nombre, apellido, CUIL, fecha de nacimiento, si tiene hijos a cargo y los contratos de trabajo que tiene con la empresa. Los contratos de los empleados tienen la fecha de inicio del contrato, la fecha de fin (si corresponde) y algunos valores adicionales dependiendo del tipo de contrato. Hay dos tipos de contratos:
+
+1. Si el contrato es "por horas", se indica el valor-hora acordado, y el número de horas que trabajará por mes. También se indica la fecha de fin del contrato.
+
+2. Si el contrato es "de planta", se indica el sueldo mensual acordado, el monto acordado por tener cónyuge a cargo, y el monto acordado por tener hijos a cargo. Estos contratos no tienen fecha de fin (nunca se vencen).
+
+Pueden existir varios contratos para un mismo empleado; sin embargo, un empleado solo puede tener un único contrato activo (no vencido) a la vez. El contrato activo para el caso de contrato “de planta” es el único contrato vigente. Para un contrato “por horas”, se considera activo aquel cuya fecha de fin sea posterior a la fecha actual.
+
+Nos piden implementar:
+
+* Generar recibo de sueldo para un empleado: Para generar el recibo de sueldo de un empleado se tiene en cuenta solo su contrato vigente. El recibo de sueldo debe contener la siguiente información: el nombre, apellido, CUIL y antigüedad en la empresa del empleado al que pertenece el recibo; la fecha en la que fue generado el recibo; y el monto total que le corresponde cobrar al empleado según el contrato vigente.
+
+El monto se calcula en dos pasos, el sueldo básico y un adicional por antigüedad. El básico se calcula de la siguiente forma:
+
+1. Si su contrato es por horas fijas, el monto a cobrar es el valor-hora acordado multiplicado por el número de horas que trabaja por mes.
+
+2. Si su contrato es de planta, el monto a cobrar es el sueldo mensual acordado, más el monto acordado por tener cónyuge a cargo (si es que tiene cónyuge a cargo), más el monto acordado por tener hijos a cargo (si es que tiene hijos a cargo).
+
+El adicional por antigüedad se calcula como un porcentaje del básico. La política de la empresa determina que el porcentaje se aumente automáticamente cuando se alcanza cierta antigüedad, en función de esta escala: 5 años 30%, 10 años 50%, 15 años 70%, 20 años 100%. Tenga en cuenta que la antigüedad de un empleado se calcula como la suma de las duraciones de cada uno de los contratos registrados.
+
+### Tareas:
+
+a) Modele e implemente
+
+* Diagrama de clases UML.
+
+* Implementación en Java la funcionalidad requerida.
+
+b) Pruebas automatizadas
+
+* Diseñe los casos de prueba teniendo en cuenta los conceptos de valores de borde y particiones equivalentes vistos en la teoría.
+
+* Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
+
+---------------------
