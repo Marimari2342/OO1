@@ -2069,3 +2069,8 @@ b) Pruebas automatizadas
 Ejercicio completo <code>[AQUI](/practica/ejercicio20/src/main/java/ar/edu/unlp/info/oo1/ejercicio20/)</code>
 
 ---------------------
+
+
+## 🟡 Ejercicio 21. Bag
+
+Enunciado y ejercicio completo <code>[AQUI](/practica/ejercicio21/)</code>

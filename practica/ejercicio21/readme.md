@@ -367,6 +367,8 @@ La implementación de un `Bag<T>` usando composición con un `Map<K, V>` es una 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
 ```java
+package unlp.oo1.bag;
+
 import java.util.AbstractCollection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -374,37 +376,42 @@ import java.util.Map;
 
 public class BagImpl<T> extends AbstractCollection<T> implements Bag<T> {
 
-    // Mapa que mantiene las cardinalidades de los elementos
-    private Map<T, Integer> map;
+    //variable de instancia
+    private Map<T, Integer> elements;// Mapa que mantiene las cardinalidades de los elementos
 
-    /*Usamos un HashMap<T, Integer> llamado map, donde las claves son los elementos (T) y los valores son las cardinalidades de esos elementos (Integer).*/
+    //constructor
+    /*Usamos un HashMap<T, Integer> donde las claves son los elementos (T) y los valores son las 
+    cardinalidades de esos elementos (Integer).*/
     public BagImpl() {
-        map = new HashMap<>();
+        this.elements = new HashMap<>();
     }
 
+    //metodos
     /*Si el elemento ya existe en el map, incrementamos su valor (la cardinalidad).
       Si el elemento no existe, lo agregamos con una cardinalidad de 1.*/
     @Override
     public boolean add(T element) {
-        map.put(element, map.getOrDefault(element, 0) + 1);
-        return true;  // Siempre se agrega correctamente
+        this.elements.put(element, this.elements.getOrDefault(element, 0) + 1);
+        return true;
     }
 
-    /*Devolvemos el valor asociado a la clave del elemento. Si no está en el map, devolvemos 0 (usando getOrDefault)*/
+    /*Devolvemos el valor asociado a la clave del elemento. Si no está en el map, devolvemos 0 
+    (usando getOrDefault)*/
     @Override
     public int occurrencesOf(T element) {
-        return map.getOrDefault(element, 0);
+        return this.elements.getOrDefault(element, 0);
     }
 
-    /*Si el elemento está en el map, decrementamos su cardinalidad. Si la cardinalidad llega a 0, eliminamos la clave del map.*/
+    /*Si el elemento está en el map, decrementamos su cardinalidad. Si la cardinalidad llega a 0, 
+    eliminamos la clave del map.*/
     @Override
     public void removeOccurrence(T element) {
-        if (map.containsKey(element)) {
-            int count = map.get(element);
+        if (this.elements.containsKey(element)) {
+            int count = this.elements.get(element);
             if (count > 1) {
-                map.put(element, count - 1);  // Decrementamos la cardinalidad
+                this.elements.put(element, count - 1);  // Decrementamos la cardinalidad
             } else {
-                map.remove(element);  // Si la cardinalidad es 1, lo eliminamos
+                this.elements.remove(element);  // Si la cardinalidad es 1, lo eliminamos
             }
         }
     }
@@ -412,41 +419,45 @@ public class BagImpl<T> extends AbstractCollection<T> implements Bag<T> {
     /*Eliminamos la clave y su valor del map.*/
     @Override
     public void removeAll(T element) {
-        map.remove(element);  // Elimina todas las ocurrencias de este elemento
+        this.elements.remove(element);
     }
 
-    /*Iteramos sobre los valores del map (las cardinalidades) y sumamos todas las cantidades para obtener el tamaño total del Bag.*/
+    /*Iteramos sobre los valores del map (las cardinalidades) y sumamos todas las cantidades para 
+    obtener el tamaño total del Bag.*/
     @Override
     public int size() {
         int totalSize = 0;
-        for (int count : map.values()) {
+        for (int count : this.elements.values()) {
             totalSize += count;  // Suma las cardinalidades de todos los elementos
         }
         return totalSize;
     }
 
-    /*Implementamos un iterador para recorrer los elementos del Bag. El iterador repite el mismo elemento según la cantidad de veces que aparece en el map.*/
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private Iterator<Map.Entry<T, Integer>> mapIterator = map.entrySet().iterator();
-            private T currentElement = null;
-            private int occurrencesLeft = 0;
+            private Iterator<Map.Entry<T, Integer>> entryIterator = elements.entrySet().iterator();
+            private Map.Entry<T, Integer> currentEntry;
+            private int remainingCount;
 
             @Override
             public boolean hasNext() {
-                return mapIterator.hasNext() || occurrencesLeft > 0;
+                return remainingCount > 0 || entryIterator.hasNext();
             }
 
             @Override
             public T next() {
-                if (occurrencesLeft == 0) {
-                    Map.Entry<T, Integer> entry = mapIterator.next();
-                    currentElement = entry.getKey();
-                    occurrencesLeft = entry.getValue();
+                if (remainingCount == 0) {
+                    currentEntry = entryIterator.next();
+                    remainingCount = currentEntry.getValue();
                 }
-                occurrencesLeft--;
-                return currentElement;
+                remainingCount--;
+                return currentEntry.getKey();
+            }
+
+            @Override
+            public void remove() {
+                removeOccurrence(currentEntry.getKey());
             }
         };
     }
