@@ -1,9 +1,10 @@
 
-public class Contrato {
+import java.time.LocalDate;
+
+
+public interface Contrato {
     
-    //variables de instancia
-
-    //constructor
-
     //metodo
+    LocalDate getFechaIngreso();
+    int antiguedadContrato();
 }

@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class ContratoPlanta {
+public class ContratoPlanta implements Contrato{
     
     //variables de instancia
     private LocalDate fechaInicio;
@@ -11,4 +11,12 @@ public class ContratoPlanta {
     //constructor
 
     //metodo
+    public LocalDate getFechaIngreso(){
+        return this.fechaInicio;
+    }
+
+    public int antiguedadContrato(){
+        DateLapse aux = new DateLapse(this.fechaInicio, LocalDate.now());
+        return aux.sizeInDays();
+    }
 }
