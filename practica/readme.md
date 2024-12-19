@@ -1984,7 +1984,46 @@ b. Pruebas automatizadas
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
+Clase: EnvioInternacional
+
+Metodo: precioEnvio
+
+Casos: 
+
+* 1. El peso del envío es menor o igual a 1kg. En este caso se cobra $5000 + $10 * gramo de peso por el envío.
+
+* 2. El peso del envío es mayor a 1kg. En este caso se cobra $5000 + $12 * gramo de peso por el envío.
+
+---------------------
+
+Clase: EnvioInterurbano
+
+Metodo: precioEnvio
+
+Casos: 
+
+* 1. La distancia entre origen y destino del envío es < 100km. En este caso se cobra $20 * gramo de peso por el envío.
+
+* 2. La distancia entre origen y destino del envío es >= 100km y <= 500km. En este caso se cobra de peso $25 * gramo por el envío.
+
+* 3. La distancia entre origen y destino del envío es > 500km. En este caso se cobra $30 * gramo de peso por el envío.
+
+---------------------
+
+Clase: EnvioLocal
+
+Metodo: precioEnvio
+
+Casos: 
+
+* 1. El envío es con entrega estandar. En este caso se cobra $1000 el envío.
+
+* 2. El envío es con entrega rápida. En este caso se cobra $1000 + $500 adicionales el envío.
+
+---------------------
+
 </details>
+
 * Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
 
 c) Es probable que los montos utilizados para los cálculos le hayan quedado fijos dentro del código (hardcoded). Piense qué pasaría si al calcular el monto a pagar se proveyera (como un parámetro más) el "cuadro tarifario". ¿Cómo sería ese objeto? ¿Qué responsabilidad le podría delegar? ¿Cómo haríamos para tener montos diferentes para los distintos países en los envíos internacionales según los pesos de los envíos?
