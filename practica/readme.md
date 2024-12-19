@@ -2066,4 +2066,6 @@ b) Pruebas automatizadas
 
 * Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
 
+Ejercicio completo <code>[AQUI](/practica/ejercicio20/src/main/java/ar/edu/unlp/info/oo1/ejercicio20/)</code>
+
 ---------------------
