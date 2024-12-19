@@ -15,8 +15,28 @@ public class ContratoPlanta implements Contrato{
         return this.fechaInicio;
     }
 
+    public double getSueldoMensual(){
+        return this.sueldoMensual;
+    }
+
+    public double getMontoConyuge(){
+        return this.montoConyuge;
+    }
+
+    public double getMontoHijos(){
+        return this.montoHijos;
+    }
+
     public int antiguedadContrato(){
         DateLapse aux = new DateLapse(this.fechaInicio, LocalDate.now());
         return aux.sizeInDays();
+    }
+
+    public boolean activo(){
+        return true;
+    }
+
+    public double calcularMonto(){
+        return this.getSueldoMensual()+this.getMontoConyuge()+this.getMontoHijos();
     }
 }

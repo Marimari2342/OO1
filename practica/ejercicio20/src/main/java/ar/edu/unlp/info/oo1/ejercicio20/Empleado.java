@@ -25,6 +25,13 @@ public class Empleado {
     }
 
     //metodo
+    public void agregarContrato(Contrato contrato){
+        this.contratos.add(contrato);
+        if (contrato.activo()){
+            this.contratoActivo=contrato;
+        }
+    }
+
     public String getNombre(){
         return this.nombre;
     }
@@ -43,11 +50,28 @@ public class Empleado {
                 .sum();
     }
 
+    public double calcularMonto(){
+        return this.contratoActivo.calcularMonto()*this.montoAntiguedad();
+    }
+
+    public double montoAntiguedad(){
+        int aux = this.getAntiguedad();
+        if (aux>=20){
+            return 2;
+        }else if (aux>=15){
+            return 1.7;
+        }else if (aux>=10){
+            return 1.5;
+        }else if (aux>=5){
+            return 1.3;
+        }else return 1;
+    }
+
     public ReciboSueldo generarRecibo(){
         //necesito antiguedad --> buscar la fecha más vieja de ingreso a la empresa.
         int ant=this.getAntiguedad();
         //necesito monto --> lo calculo en otro metodo (LO HAGO MAÑANA)
-        double monto=0;
+        double monto=this.calcularMonto();
         //creo recibo
         ReciboSueldo recibo = new ReciboSueldo(this.getNombre(), this.getApellido(), this.getCuil(), ant, monto);
         return recibo; //lo retorno
