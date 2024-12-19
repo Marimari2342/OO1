@@ -18,6 +18,15 @@ public abstract class Envio {
     }
 
     //metodos
+
+    public double getPeso(){
+        return this.peso;
+    }
+
+    public LocalDate getFechaDespacho(){
+        return this.fechaDespacho;
+    }
     
+    public abstract double precioEnvio();
 
 }

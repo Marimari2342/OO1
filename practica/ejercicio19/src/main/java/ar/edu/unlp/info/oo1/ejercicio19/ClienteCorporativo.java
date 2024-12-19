@@ -8,6 +8,4 @@ public class ClienteCorporativo extends Cliente{
         super(nombre, direccion);
         this.cuit=cuit;
     }
-    
-    //metodos
 }

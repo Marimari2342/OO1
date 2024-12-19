@@ -8,6 +8,9 @@ public class PersonaFisica extends Cliente {
         super(nombre, direccion);
         this.dni=dni;
     }
-    
+
     //metodos
+    public double calcularMontoPagar(DateLapse periodo){
+        return super.calcularMontoPagar(periodo)*0.9;
+    }
 }

@@ -1964,12 +1964,27 @@ a. Modele e implemente
 
 * Diagrama de clases UML.
 
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+![uml19](/practica/ejercicio19/ejercicio19.jpg)
+
+</details>
+
 * Implemente en Java la funcionalidad requerida.
+
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+Ejercicio completo <code>[AQUI](/practica/ejercicio19/src/main/java/ar/edu/unlp/info/oo1/ejercicio19/)</code>
+
+</details>
 
 b. Pruebas automatizadas
 
 * Diseñe los casos de prueba teniendo en cuenta los conceptos de valores de borde y particiones equivalentes vistos en la teoría.
 
+<details><summary> <code> Respuesta 🖱 </code></summary><br>
+
+</details>
 * Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
 
 c) Es probable que los montos utilizados para los cálculos le hayan quedado fijos dentro del código (hardcoded). Piense qué pasaría si al calcular el monto a pagar se proveyera (como un parámetro más) el "cuadro tarifario". ¿Cómo sería ese objeto? ¿Qué responsabilidad le podría delegar? ¿Cómo haríamos para tener montos diferentes para los distintos países en los envíos internacionales según los pesos de los envíos?
