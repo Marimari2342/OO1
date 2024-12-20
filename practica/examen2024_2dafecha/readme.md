@@ -6,6 +6,8 @@
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
+![umlExamen2daFecha2024](/practica/examen2024_2dafecha/examen2024UML.jpg)
+
 </details>
 
 2. Implemente en Java toda la funcionalidad antes descripta. Puede usar las clases implementadas en los ejerciios de la práctica: DateLapse, FilteredSet, Bag, según se requiera.
@@ -54,7 +56,7 @@ Ejercicio completo <code>[AQUI](/practica/examen2024_2dafecha/src/main/java/ar/e
 
 </details>
 
-4. Un ejemplo del código Java necesario para crear un humano con rol mago que se enfrenta con un orco con rol guerrero a las 22hs. Luego, el humano cambia su rol a guerrero y se enfrenta con el mismo orco guerrero E las 14 hs.
+4. Un ejemplo del código Java necesario para crear un humano con rol mago que se enfrenta con un orco con rol guerrero a las 22hs. Luego, el humano cambia su rol a guerrero y se enfrenta con el mismo orco guerrero a las 14 hs.
 
 <details><summary> <code> Respuesta 🖱 </code></summary><br>
 
