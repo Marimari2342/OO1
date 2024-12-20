@@ -32,7 +32,7 @@ Ejercicio completo <code>[AQUI](/practica/examen2024_2dafecha/src/main/java/ar/e
 
 * Rol --> Metodo mejorarHabilidad()
 
-<br><br>
+<br>
 
 (1) Caso1: Personaje Humano con Rol Mago y nivel<7
 
@@ -50,7 +50,7 @@ Ejercicio completo <code>[AQUI](/practica/examen2024_2dafecha/src/main/java/ar/e
 
 (8) Caso8: Personaje Orco con Rol Guerrero y nivel n tq (n%3=0)
 
-<br><br>
+<br>
 
 (1)(2)(5)(6) --> el nivel se incrementa en 1, no mejora su habilidad.
 
