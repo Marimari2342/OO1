@@ -2070,7 +2070,42 @@ Ejercicio completo <code>[AQUI](/practica/ejercicio20/src/main/java/ar/edu/unlp/
 
 ---------------------
 
-
 ## 🟡 Ejercicio 21. Bag
 
 Enunciado y ejercicio completo <code>[AQUI](/practica/ejercicio21/)</code>
+
+---------------------
+
+## 🟡 Ejercicio 22. Estadísticas del Cliente de Correo
+
+Extienda el Ejercicio 13 --> Cliente de Correo
+
+Nos piden implementar la siguiente funcionalidad:
+
+* Cantidad de emails que tiene una carpeta
+
+* Cantidad total de emails en el cliente de correo: considerando todas las carpetas existentes.
+
+* Cantidad de mails por categoría: para cada carpeta se debe calcular y retornar en un solo objeto, la cantidad de emails categorizados por tamaño siguiendo el siguiente criterio:
+
+1. Pequeño: el email tiene un tamaño entre 0 y 300.
+
+2. Mediano: el email tiene un tamaño entre 301 y 500.
+
+3, Grande: el email tiene un tamaño mayor a 501.
+
+### Tareas:
+
+a) Modele e implemente
+
+* Modifique el diagrama de clases UML según lo necesario
+
+* Implemente en Java los cambios solicitados
+
+b) Pruebas automatizadas
+
+* Diseñe los casos de prueba teniendo en cuenta los conceptos de valores de borde y particiones equivalentes vistos en la teoría.
+
+* Implemente utilizando JUnit los tests automatizados diseñados en el punto anterior.
+
+---------------------
