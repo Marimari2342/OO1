@@ -46,6 +46,12 @@
       <version>5.7.2</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+    	<groupId>ar.edu.unlp.info.oo1</groupId>
+    	<artifactId>ejercicio25</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+	</dependency>
   </dependencies>
   
   <scm>

@@ -42,4 +42,8 @@ class ClienteDeCorreoTest {
 		assertEquals(this.cliente.espacioOcupado(),esperado);
 	}
 
+	@Test 
+	void testCantidadTotalMails() {
+		assertEquals(this.cliente.cantidadTotalMails(),3);
+	}
 }

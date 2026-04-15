@@ -36,4 +36,8 @@ public class ClienteDeCorreo {
 	public int espacioOcupado() {
 		return this.inbox.tamanio()+this.carpetas.stream().mapToInt(carpeta->carpeta.tamanio()).sum();
 	}
+	
+	public int cantidadTotalMails() {
+		return this.inbox.cantidadMails()+this.carpetas.stream().mapToInt(carpeta -> carpeta.cantidadMails()).sum();
+	}
 }

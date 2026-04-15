@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.oo1.ejercicio15;
 import java.util.LinkedList;
+import ar.edu.unlp.info.oo1.ejercicio25.BagImpl;
 
 public class Carpeta {
 
@@ -46,6 +47,22 @@ public class Carpeta {
 				.mapToInt(email->email.tamanioEmail())
 				.sum();
 	}
+
+	public int cantidadMails() {
+		return this.cantidadDeEmailsPorTamaño().size();
+	}
 	
+	public BagImpl<String> cantidadDeEmailsPorTamaño() {
+        BagImpl<String> bag = new BagImpl<>();
+        for (Email email : this.emails) {
+            if (email.tamanioEmail() <= 300)
+                bag.add("Pequeño");
+            else if (email.tamanioEmail() <= 500)
+                bag.add("Mediano");
+            else
+                bag.add("Grande");
+        }
+        return bag;
+    }
 }
 

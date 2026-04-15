@@ -4,6 +4,7 @@ import java.util.LinkedList;
 public class Email {
 
 	//variables de instancia
+	private String categoria;
 	private String titulo;
 	private String cuerpo;
 	private LinkedList<Archivo> adjuntos;
@@ -23,7 +24,9 @@ public class Email {
 	public String getCuerpo() {
 		return this.cuerpo;
 	}
-	
+	public String getCategoria() {
+		return this.categoria;
+	}
 	public void agregarArchivo(Archivo archivo) {
 		this.adjuntos.add(archivo);
 	}
@@ -42,5 +45,13 @@ public class Email {
 	
 	public boolean buscarTexto(String texto) {
 		return this.getTitulo().contains(texto) || this.getCuerpo().contains(texto);
+	}
+	
+	public void categoria() {
+		if (this.tamanioEmail()<=300) {
+			this.categoria = "Pequeño";
+		} else if (this.tamanioEmail()<=500){
+			this.categoria = "Mediano";
+		} else this.categoria = "Grande";
 	}
 }
