@@ -329,3 +329,25 @@ if (producto.tipo.equals("Producto")){
 </details>
 
 **Solución**: aplicar polimorfismo correctamente, en este caso se tiene que calcular costo, si tengo dos clases Producto y Servicio que implementan una interfaz con el método costo, lo ideal sería que cada una implemente costo de una manera distinta y así se evita caer en el Switch Statement para consultar el tipo de objeto que es. 
+
+* **PROBLEMA DE DISEÑO**: el modo en como se agregan nuevos items al Pedido no es el mejor, puedo que una vez creado el pedido no puedo agregar nuevos items.
+
+<details><summary> <code> Problema 🖱 </code></summary><br>
+
+~~~java
+public static void main(String[] args){
+  //ejemplo de instanciacion de un Servicio
+  Producto servicio = new Producto("Servicio",5,100,"Configurar red Wi-Fi",0,0,0,null);
+  //ejemplo de instanciacion de un Producto
+  Producto producto = new Producto("Producto",0,0,null,500,3,1,"Martillo");
+  List<Producto> items = new ArrayList<Producto>();
+  items.add(servicio);
+  items.add(producto);
+  Pedido pedido = new Pedido(items);
+  System.out.println("Costo total: "+pedido.costoTotal());
+}
+~~~
+
+</details>
+
+**Solución**: lo ideal sería que Pedido tenga un método agregarItem en donde pueda agregar más items si lo requiero. 
