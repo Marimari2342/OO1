@@ -170,5 +170,72 @@ private double valorActual(Inversion inversion) {
 **Solución**: se soluciona usando polimorfismo + herencia, entonces evito preguntar por la clase de objeto que es para hacer algo. 
 
 
+### 🟢 Ejercicio final (1ra fecha febrero 2024)
+
+<details><summary> <code> Código a corregir 🖱 </code></summary><br>
+  
+~~~java
+public class Pedido {
+  private List<Producto> items;
+
+  public Pedido(List<Producto> productos){
+    this.items = productos;
+  }
+
+  public double costoTotal(){
+    return this.items.stream().mapToDouble(producto -> this.costo(producto)).sum();
+  }
+
+  private double costo(Producto producto) {
+    double total = 0;
+    if (producto.tipo.equals("Servicio")){
+      total = producto.horasTrabajadas*producto.valorHora;
+    }
+    if (producto.tipo.equals("Producto")){
+      total = producto.costo + (producto.costoDeEnvioPorKilo*producto.peso);
+    }
+    return total;
+  }
+
+  public static void main(String[] args){
+    //ejemplo de instanciacion de un Servicio
+    Producto servicio = new Producto("Servicio",5,100,"Configurar red Wi-Fi",0,0,0,null);
+    //ejemplo de instanciacion de un Producto
+    Producto producto = new Producto("Producto",0,0,null,500,3,1,"Martillo");
+    List<Producto> items = new ArrayList<Producto>();
+    items.add(servicio);
+    items.add(producto);
+    Pedido pedido = new Pedido(items);
+    System.out.println("Costo total: "+pedido.costoTotal());
+  }
+}
+
+public class Producto {
+  public String tipo;
+  //variables para los servicios
+  public int horasTrabajadas;
+  public double valorHora;
+  public String objetivo;
+  //variables para los productos
+  public double costo;
+  public double costoDeEnvioPorKilo;
+  public double peso;
+  public String nombre;
+
+  public Producto(String tipo, int horasTrab, double valorHora, String obj, double costo, double costoKilo, double peso, double nombre){
+    this.tipo = tipo;
+    this.horasTrabajadas = horasTrab;
+    this.valorHora = valorHora;
+    this.objetivo = objetivo;
+    this.costo = costo;
+    this.costoDeEnvioPorKilo = costoKilo;
+    this.peso = peso;
+    this.nombre = nombre;
+  }
+}
+~~~
+
+</details>
+
 
 
