@@ -169,7 +169,7 @@ private double valorActual(Inversion inversion) {
 
 **Solución**: se soluciona usando polimorfismo + herencia, entonces evito preguntar por la clase de objeto que es para hacer algo. 
 
-**CODIGO MEJORADO (main y test)**➡️[<code>**AQUÍ**</code>](https://github.com/Marimari2342/OO1/tree/main/finales/resoluciones/enunciadoChatgpt/chatgptsolucion/src).
+**CODIGO MEJORADO** (main y test)➡️[<code>**AQUÍ**</code>](https://github.com/Marimari2342/OO1/tree/main/finales/resoluciones/enunciadoChatgpt/chatgptsolucion/src).
 
 ### 🟢 Ejercicio final (1ra fecha febrero 2024)
 
