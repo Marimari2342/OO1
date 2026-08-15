@@ -171,6 +171,8 @@ private double valorActual(Inversion inversion) {
 
 **CODIGO MEJORADO** (main y test)➡️[<code>**AQUÍ**</code>](https://github.com/Marimari2342/OO1/tree/main/finales/resoluciones/enunciadoChatgpt/chatgptsolucion/src).
 
+___________________________________________________________________________________________
+
 ### 🟢 Ejercicio final (1ra fecha febrero 2024)
 
 <details><summary> <code> Código a corregir 🖱 </code></summary><br>
@@ -238,5 +240,92 @@ public class Producto {
 
 </details>
 
+### Problemas en la solución
 
+* **CLASE DE DATOS O ANÉMICA**: la clase Producto no presenta comportamiento, es una clase anémica (sólo tiene variables de instancia y los constructores, pero no presenta ningún método).
 
+<details><summary> <code> Problema 🖱 </code></summary><br>
+
+~~~java
+public class Producto {
+  //variables de instancia
+  //constructores
+}
+~~~
+
+</details>
+
+**Solución**: asegurarse que no hay comportamiento que debería estar haciendo esta clase y lo está haciendo algún otro objeto (que mostraría envidia de atrubutos).
+
+* **RUPTURA ENCAPSULAMIENTO**: en la clase Producto las variables de instancia son públicas, esto produce que se rompa el encapsulamiento puesto que otras clases pueden acceder a las variables de Producto.
+
+<details><summary> <code> Problema 🖱 </code></summary><br>
+
+~~~java
+public String tipo;
+//variables para los servicios
+public int horasTrabajadas;
+public double valorHora;
+public String objetivo;
+//variables para los productos
+public double costo;
+public double costoDeEnvioPorKilo;
+public double peso;
+public String nombre;
+~~~
+
+</details>
+
+**Solución**: las variables deben ser declaradas como privadas (o protegidas), y también asegurarme de no usar getters o setters porque si (aunque en este caso no sucede).
+
+* **VARIABLES DE INSTANCIA QUE DEBERÍAN SER TEMPORALES O NO CORRESPONDEN**: esto se debe a que al tener la clase definida así, hay variables que no se usan (por ejemplo si es de tipo Servicio no uso costo porque es una variable que corresponde al tipo Producto).
+
+<details><summary> <code> Problema 🖱 </code></summary><br>
+
+~~~java
+public String tipo;
+//variables para los servicios
+public int horasTrabajadas;
+public double valorHora;
+public String objetivo;
+//variables para los productos
+public double costo;
+public double costoDeEnvioPorKilo;
+public double peso;
+public String nombre;
+~~~
+
+</details>
+
+**Solución**: herencia + polimorfismo. Lo ideal es tener dos clases Producto y Servicio que implementen una interfaz (puesto que no comparten variables de instancia pero si comportamiento).
+
+* **ENVIDIA DE ATRIBUTOS**: puesto que la clase Pedido accede a las variables de la clase Producto y realiza cálculos que debería estar haciendo la clase Producto.
+
+<details><summary> <code> Problema 🖱 </code></summary><br>
+
+~~~java
+//dentro de Pedido un método tiene:
+total = producto.horasTrabajadas*producto.valorHora;
+total = producto.costo + (producto.costoDeEnvioPorKilo*producto.peso);
+~~~
+
+</details>
+
+**Solución**: las tareas que deben hacerse con las variables de la clase Producto, deberían ser delegadas a Producto y que se resuelvan en esa clase.
+
+* **SWITCH STATEMENTS**: puesto que tengo un if que pregunta de que tipo es el producto para hacer algo determinado. 
+
+<details><summary> <code> Problema 🖱 </code></summary><br>
+
+~~~java
+if (producto.tipo.equals("Servicio")){
+  total = producto.horasTrabajadas*producto.valorHora;
+}
+if (producto.tipo.equals("Producto")){
+  total = producto.costo + (producto.costoDeEnvioPorKilo*producto.peso);
+}
+~~~
+
+</details>
+
+**Solución**: aplicar polimorfismo correctamente, en este caso se tiene que calcular costo, si tengo dos clases Producto y Servicio que implementan una interfaz con el método costo, lo ideal sería que cada una implemente costo de una manera distinta y así se evita caer en el Switch Statement para consultar el tipo de objeto que es. 
