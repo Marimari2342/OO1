@@ -351,3 +351,5 @@ public static void main(String[] args){
 </details>
 
 **Solución**: lo ideal sería que Pedido tenga un método agregarItem en donde pueda agregar más items si lo requiero. 
+
+**CODIGO MEJORADO** (main y test)➡️[<code>**AQUÍ**</code>](https://github.com/Marimari2342/OO1/tree/main/finales/resoluciones/examen2024febrero/examen2024febrero/src).
